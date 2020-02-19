@@ -367,33 +367,6 @@ td {
 }
 .highlight-wrap {
   position: relative;
-  border-radius: 6px;
-  box-shadow: 18px 18px 15px 0px rgba(0,0,0,0.4);
-  margin: 35px 0;
-  margin-top: 10px;
-  margin-bottom: 28px;
-}
-.highlight-wrap ::-webkit-scrollbar {
-  height: 10px;
-}
-.highlight-wrap ::-webkit-scrollbar-track {
-/*滚动条框*/
-  -webkit-box-shadow: inset 0 0 20px rgba(255,255,255,0.3);
-  border-radius: 10px;
-}
-.highlight-wrap ::-webkit-scrollbar-thumb {
-/*滚动条里面小方块*/
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 50px rgba(200,200,200,0.5);
-}
-.highlight {
-  border-radius: 6px;
-}
-.table-container {
-  border-radius: 6px;
-}
-.highlight-wrap {
-  position: relative;
 }
 .highlight-wrap:hover .copy-btn,
 .highlight-wrap .copy-btn:focus {
@@ -416,13 +389,50 @@ td {
   -ms-user-select: none;
   -webkit-user-select: none;
   user-select: none;
-  background-color: #eee;
-  background-image: linear-gradient(#fcfcfc, #eee);
-  border: 1px solid #d5d5d5;
-  border-radius: 3px;
-  font-size: 1em;
-  right: 4px;
-  top: 8px;
+  color: #fff;
+  font-size: 14px;
+  right: 2px;
+  top: 2px;
+}
+.highlight-wrap {
+  background: #21252b;
+  border-radius: 5px;
+  padding-top: 33px;
+  position: relative;
+  box-shadow: 18px 18px 15px 0px rgba(0,0,0,0.4);
+  margin: 35px 0;
+  margin-top: 10px;
+  margin-bottom: 28px;
+}
+.highlight-wrap ::-webkit-scrollbar {
+  height: 10px;
+}
+.highlight-wrap ::-webkit-scrollbar-track {
+/*滚动条框*/
+  -webkit-box-shadow: inset 0 0 10px rgba(255,255,255,0.3);
+  border-radius: 10px;
+}
+.highlight-wrap ::-webkit-scrollbar-thumb {
+/*滚动条里面小方块*/
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 10px rgba(150,150,150,0.5);
+}
+.highlight-wrap::before {
+  background: #fc625d;
+  border-radius: 50%;
+  box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+  content: ' ';
+  height: 12px;
+  left: 16px;
+  margin-top: -22px;
+  position: absolute;
+  width: 12px;
+}
+.highlight {
+  border-radius: 5px;
+}
+.table-container {
+  border-bottom-left-radius: 5px;
 }
 pre,
 .highlight {
@@ -1297,7 +1307,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #fa7957;
+  background: #85ff47;
   border-radius: 50%;
   content: ' ';
   display: inline-block;

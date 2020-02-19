@@ -202,20 +202,18 @@
 </ol>
 <p><img src="https://img-blog.csdnimg.cn/20200211181703478.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
 <ul>
-<li>更改主题配置文件中的 highlight_theme 字段，将其值设定成你所喜爱的高亮主题，例如：</li>
+<li>更改主题配置文件中的 highlight_theme 字段，将其值设定成你所喜爱的高亮主题，<kbd>copy_button.style</kbd>字段可以设置代码块复制按钮的风格，例如：</li>
 </ul>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">codeblock:</span></span><br><span class="line">  <span class="comment"># Code Highlight theme</span></span><br><span class="line">  <span class="comment"># Available value: normal | night | night eighties | night blue | night bright</span></span><br><span class="line">  <span class="comment"># https://github.com/chriskempson/tomorrow-theme</span></span><br><span class="line">  <span class="attr">highlight_theme:</span> <span class="string">night</span> <span class="string">eighties</span></span><br><span class="line">  <span class="comment"># Add copy button on codeblock</span></span><br><span class="line">  <span class="attr">copy_button:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span>                 <span class="comment"># 在每个代码块显示复制按钮</span></span><br><span class="line">    <span class="comment"># Show text copy result.</span></span><br><span class="line">    <span class="attr">show_result:</span> <span class="literal">true</span>            <span class="comment"># 复制成功后，显示提示信息</span></span><br><span class="line">    <span class="comment"># Available values: default | flat | mac</span></span><br><span class="line">    <span class="attr">style:</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">codeblock:</span></span><br><span class="line">  <span class="comment"># Code Highlight theme</span></span><br><span class="line">  <span class="comment"># Available value: normal | night | night eighties | night blue | night bright</span></span><br><span class="line">  <span class="comment"># https://github.com/chriskempson/tomorrow-theme</span></span><br><span class="line">  <span class="attr">highlight_theme:</span> <span class="string">night</span> <span class="string">eighties</span></span><br><span class="line">  <span class="comment"># Add copy button on codeblock</span></span><br><span class="line">  <span class="attr">copy_button:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span>                 <span class="comment"># 在每个代码块显示复制按钮</span></span><br><span class="line">    <span class="comment"># Show text copy result.</span></span><br><span class="line">    <span class="attr">show_result:</span> <span class="literal">true</span>            <span class="comment"># 复制成功后，显示提示信息</span></span><br><span class="line">    <span class="comment"># Available values: default | flat | mac</span></span><br><span class="line">    <span class="attr">style:</span> <span class="string">mac</span>                   <span class="comment"># 复制按钮风格</span></span><br></pre></td></tr></table></figure>
 
 
-<h2 id="添加代码块阴影效果"><a href="#添加代码块阴影效果" class="headerlink" title="添加代码块阴影效果"></a>添加代码块阴影效果</h2><ol>
-<li>在themes\next\source\css\_common\scaffolding\highlight目录下边新建macPanel.styl文件，内容如下：</li>
+<h2 id="代码块Mac-Panel特效"><a href="#代码块Mac-Panel特效" class="headerlink" title="代码块Mac Panel特效"></a>代码块Mac Panel特效</h2><ol>
+<li><p>在上述设置代码高亮主题中将<kbd>copy_button</kbd>设为 true，并将<kbd>style</kbd>设置为 mac；</p>
+</li>
+<li><p>打开F:\themes\next\source\css\_common\scaffolding\highlight\copy-code.styl文件，做如下修改，具体值可自行设定：</p>
+</li>
 </ol>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*代码块阴影效果设置*/</span></span><br><span class="line"><span class="selector-class">.highlight-wrap</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">6px</span>;</span><br><span class="line">  <span class="attribute">box-shadow</span>: <span class="number">18px</span> <span class="number">18px</span> <span class="number">15px</span> <span class="number">0px</span> <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">4</span>);</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">35px</span> <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="number">28px</span>;</span><br><span class="line">  ::-webkit-scrollbar &#123;</span><br><span class="line">    <span class="selector-tag">height</span>: 10<span class="selector-tag">px</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-pseudo">::-webkit-scrollbar-track</span> &#123;  <span class="comment">/*滚动条框*/</span></span><br><span class="line">    <span class="attribute">-webkit-box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">20px</span> <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.3</span>);</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-pseudo">::-webkit-scrollbar-thumb</span> &#123;  <span class="comment">/*滚动条里面小方块*/</span></span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">-webkit-box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">50px</span> <span class="built_in">rgba</span>(<span class="number">200</span>, <span class="number">200</span>, <span class="number">200</span>, <span class="number">0.5</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*代码块圆角边框设置*/</span></span><br><span class="line"><span class="selector-class">.highlight</span> &#123;</span><br><span class="line">	<span class="attribute">border-radius</span>: <span class="number">6px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.table-container</span> &#123;</span><br><span class="line">	<span class="attribute">border-radius</span>: <span class="number">6px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>在themes\next\source\css\_common\scaffolding\highlight\highlight.styl文件中引入上面新建的文件：</li>
-</ol>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@require</span> <span class="string">"macPanel"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">if (hexo-config('codeblock.copy_button.style') == 'mac') &#123;</span><br><span class="line">  <span class="selector-class">.highlight-wrap</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#21252b</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">padding-top</span>: <span class="number">33px</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">18px</span> <span class="number">18px</span> <span class="number">15px</span> <span class="number">0px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.4</span>);</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">35px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="number">28px</span>;</span><br><span class="line"></span><br><span class="line">    ::-webkit-scrollbar &#123;</span><br><span class="line">      <span class="selector-tag">height</span>: 10<span class="selector-tag">px</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">::-webkit-scrollbar-track</span> &#123;  <span class="comment">/*滚动条框*/</span></span><br><span class="line">      <span class="attribute">-webkit-box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.3</span>);</span><br><span class="line">      <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">::-webkit-scrollbar-thumb</span> &#123;  <span class="comment">/*滚动条里面小方块*/</span></span><br><span class="line">      <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">      <span class="attribute">-webkit-box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="built_in">rgba</span>(<span class="number">150</span>, <span class="number">150</span>, <span class="number">150</span>, <span class="number">0.5</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &amp;<span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">      <span class="attribute">background</span>: <span class="number">#fc625d</span>;</span><br><span class="line">      <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">      <span class="attribute">box-shadow</span>: <span class="number">20px</span> <span class="number">0</span> <span class="number">#fdbc40</span>, <span class="number">40px</span> <span class="number">0</span> <span class="number">#35cd4b</span>;</span><br><span class="line">      <span class="attribute">content</span>: <span class="string">' '</span>;</span><br><span class="line">      <span class="attribute">height</span>: <span class="number">12px</span>;</span><br><span class="line">      <span class="attribute">left</span>: <span class="number">16px</span>;</span><br><span class="line">      <span class="attribute">margin-top</span>: -<span class="number">22px</span>;</span><br><span class="line">      <span class="attribute">position</span>: absolute;</span><br><span class="line">      <span class="attribute">width</span>: <span class="number">12px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*代码块圆角边框设置*/</span></span><br><span class="line">  <span class="selector-class">.highlight</span> &#123;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-class">.table-container</span> &#123;</span><br><span class="line">    <span class="attribute">border-bottom-left-radius</span>: <span class="number">5px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 <h2 id="设置文本框圆角边框"><a href="#设置文本框圆角边框" class="headerlink" title="设置文本框圆角边框"></a>设置文本框圆角边框</h2><ul>
@@ -343,7 +341,7 @@
 <ul>
 <li>上述方法不太理想，还可以在themes\next\source\css\_variables\base.styl中修改。</li>
 </ul>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">// Font size</span><br><span class="line">$font-size-base           = .75em;      //整体大小</span><br><span class="line">$font-size-smallest       = .5em;       //首页阅读时长等</span><br><span class="line">$font-size-smaller        = 1em;        //侧边栏（归档等）</span><br><span class="line">$font-size-small          = .875em;     //阅读全文及文章内容</span><br><span class="line">$font-size-medium         = 1em;        //头像下边日志、分类、标签</span><br><span class="line">$font-size-large          = 1.25em;     //首页文章标题及文章内容</span><br><span class="line">$font-size-larger         = 1.25em;</span><br><span class="line">$font-size-largest        = 1.75em;     //用户名</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">// Font size</span><br><span class="line">$font-size-base           = .75em;      //整体大小</span><br><span class="line">$font-size-smallest       = .6em;       //首页阅读时长等</span><br><span class="line">$font-size-smaller        = 1em;        //侧边栏（归档等）</span><br><span class="line">$font-size-small          = .875em;     //阅读全文及文章内容</span><br><span class="line">$font-size-medium         = 1em;        //头像下边日志、分类、标签</span><br><span class="line">$font-size-large          = 1.25em;     //首页文章标题及文章内容</span><br><span class="line">$font-size-larger         = 1.25em;</span><br><span class="line">$font-size-largest        = 1.75em;     //用户名</span><br></pre></td></tr></table></figure>
 
 
 <h2 id="设置菜单及页面"><a href="#设置菜单及页面" class="headerlink" title="设置菜单及页面"></a>设置菜单及页面</h2><ul>
@@ -821,18 +819,18 @@
 <td></td>
 </tr>
 <tr>
-<td>date</td>
-<td>建立日期</td>
-<td>文件建立日期</td>
+<td>description</td>
+<td>文章描述</td>
+<td></td>
 </tr>
 <tr>
-<td>updated</td>
-<td>更新日期</td>
-<td>文件更新日期</td>
+<td>keywords</td>
+<td>文章关键字</td>
+<td></td>
 </tr>
 <tr>
 <td>comments</td>
-<td>开启文章的评论功能</td>
+<td>设置是否开启评论</td>
 <td>true</td>
 </tr>
 <tr>
@@ -849,6 +847,16 @@
 <td>permalink</td>
 <td>覆盖文章网址</td>
 <td></td>
+</tr>
+<tr>
+<td>date</td>
+<td>建立日期</td>
+<td>文件建立日期</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>更新日期</td>
+<td>文件更新日期</td>
 </tr>
 </tbody></table>
 <hr>
