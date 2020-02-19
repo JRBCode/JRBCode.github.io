@@ -53,12 +53,12 @@
   };
 </script>
 
-  <meta name="description" content="AV.initialize(&quot;vf1PX3HcySrTew4DU3DqgaWT-gzGzoHsz&quot;, &quot;TFuvyjJycfrO16DEnG2l3cNS&quot;);      var time &#x3D; 0     var title &#x3D; &quot;&quot;     var url &#x3D; &quot;&quot;     var query &#x3D; new AV.Query(&#39;Counter&#39;);     query.notEqualTo(">
+  <meta name="description" content="AV.initialize(&quot;vf1PX3HcySrTew4DU3DqgaWT-gzGzoHsz&quot;,&quot;TFuvyjJycfrO16DEnG2l3cNS&quot;)var time&#x3D;0,title&#x3D;&quot;&quot;,url&#x3D;&quot;&quot;,query&#x3D;new AV.Query(&quot;Counter&quot;);query.notEqualTo(&quot;id&quot;,0),query.descending(&quot;time&quot;),query.limit(1e3)">
 <meta property="og:type" content="website">
 <meta property="og:title" content="文章热度排行">
 <meta property="og:url" content="https://jrbcode.github.io/top/index.html">
 <meta property="og:site_name" content="CodeHeap">
-<meta property="og:description" content="AV.initialize(&quot;vf1PX3HcySrTew4DU3DqgaWT-gzGzoHsz&quot;, &quot;TFuvyjJycfrO16DEnG2l3cNS&quot;);      var time &#x3D; 0     var title &#x3D; &quot;&quot;     var url &#x3D; &quot;&quot;     var query &#x3D; new AV.Query(&#39;Counter&#39;);     query.notEqualTo(">
+<meta property="og:description" content="AV.initialize(&quot;vf1PX3HcySrTew4DU3DqgaWT-gzGzoHsz&quot;,&quot;TFuvyjJycfrO16DEnG2l3cNS&quot;)var time&#x3D;0,title&#x3D;&quot;&quot;,url&#x3D;&quot;&quot;,query&#x3D;new AV.Query(&quot;Counter&quot;);query.notEqualTo(&quot;id&quot;,0),query.descending(&quot;time&quot;),query.limit(1e3)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-02-15T13:11:11.000Z">
 <meta property="article:modified_time" content="2020-02-15T14:42:50.108Z">
@@ -85,7 +85,7 @@
     <script src="/js/cursor/love.min.js"></script>
   
    <!--新增：鼠标点击特效-->
-  <script src="/live2d-widget/autoload.js"></script>   <!--新增：板娘live2d模型-->
+  <script src="/lib/live2d-widget/autoload.js"></script>   <!--新增：板娘live2d模型-->
   <title>文章热度排行 | CodeHeap
   </title>
   
@@ -240,37 +240,7 @@
       
       
       <div class="post-body">
-          <div id="top" style="margin-top:30px;"></div>
-
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<!-- <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script> -->
-<script>AV.initialize("vf1PX3HcySrTew4DU3DqgaWT-gzGzoHsz", "TFuvyjJycfrO16DEnG2l3cNS");</script>
-<script type="text/javascript">
-    var time = 0
-    var title = ""
-    var url = ""
-    var query = new AV.Query('Counter');
-    query.notEqualTo('id', 0);
-    query.descending('time');
-    query.limit(1000);
-    query.find().then(function (todo) {
-        for (var i = 0; i < 1000; i++) {
-            var result = todo[i].attributes;
-            time = result.time;
-            title = result.title;
-            url = result.url;
-            var content = "<p class='my-article-top'>" + "<font color='#a7a7e5'>" + "➤【热度: " + "</font>" + "<font color='#f1a8ce'>" + time + " ℃】" + "</font>" + "<a href='" + url + "'>" + title + "</a>" + "</p>";
-            document.getElementById("top").innerHTML += content
-        }
-    }, function (error) {
-        console.log("error");
-    });
-</script>
-
-<style>.post-description {
-        display: none;
-    }
-</style>
+          <!-- build time:Wed Feb 19 2020 14:16:31 GMT+0800 (GMT+08:00) --><div id="top" style="margin-top:30px"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script>AV.initialize("vf1PX3HcySrTew4DU3DqgaWT-gzGzoHsz","TFuvyjJycfrO16DEnG2l3cNS")</script><script type="text/javascript">var time=0,title="",url="",query=new AV.Query("Counter");query.notEqualTo("id",0),query.descending("time"),query.limit(1e3),query.find().then(function(e){for(var t=0;1e3>t;t++){var r=e[t].attributes;time=r.time,title=r.title,url=r.url;var o="<p class='my-article-top'><font color='#a7a7e5'>➤【热度: </font><font color='#f1a8ce'>"+time+" ℃】</font><a href='"+url+"'>"+title+"</a></p>";document.getElementById("top").innerHTML+=o}},function(e){console.log("error")})</script><style>.post-description{display:none}</style><!-- rebuild by neat -->
       </div>
       
       
@@ -349,7 +319,7 @@
         <a href="https://github.com/JRBCode" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;JRBCode" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.leancloud.cn/" title="LeanCloud &amp;rarr; https:&#x2F;&#x2F;www.leancloud.cn&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>LeanCloud</a>
+        <a href="https://www.leancloud.cn/" title="LeanCloud &amp;rarr; https:&#x2F;&#x2F;www.leancloud.cn&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-comment"></i>LeanCloud</a>
       </span>
   </div>
 
@@ -483,7 +453,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">总字数：</span>
-    <span title="总字数">52k</span>
+    <span title="总字数">53k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
