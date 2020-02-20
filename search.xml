@@ -3,7 +3,7 @@
   <entry>
     <title>Hexo+GitHub博客搭建</title>
     <url>/posts/63c4b34f.html</url>
-    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200212234919772.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://img-blog.csdnimg.cn/20200212234919772.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
 <a id="more"></a>
 
 
@@ -885,7 +885,7 @@
   <entry>
     <title>Python学习(小甲鱼)</title>
     <url>/posts/d8fb208b.html</url>
-    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200213000329775.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://img-blog.csdnimg.cn/20200213000329775.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
 <a id="more"></a>
 
 <ul>
@@ -902,7 +902,7 @@
   <entry>
     <title>Java中的匿名内部类及Lambda表达式</title>
     <url>/posts/3bccc17d.html</url>
-    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20200213121801641.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://img-blog.csdnimg.cn/20200213121801641.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
 <a id="more"></a>
 
 <h1 id="一、匿名内部类"><a href="#一、匿名内部类" class="headerlink" title="一、匿名内部类"></a>一、匿名内部类</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>匿名内部类没有名字，其定义格式如下：</p>
@@ -986,7 +986,7 @@
   <entry>
     <title>Git常用命令</title>
     <url>/posts/caff8000.html</url>
-    <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/2020021223384954.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://img-blog.csdnimg.cn/2020021223384954.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
 <a id="more"></a>
 
 <h2 id="Git-工作区-暂存区-版本库"><a href="#Git-工作区-暂存区-版本库" class="headerlink" title="Git 工作区/暂存区/版本库"></a>Git 工作区/暂存区/版本库</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">"JRBW0910"</span></span><br><span class="line"></span><br><span class="line">git config --global user.email <span class="string">"244085774@qq.com"</span></span><br><span class="line"></span><br><span class="line">git init   把指定目录变成 Git 可以管理的仓库</span><br><span class="line"></span><br><span class="line">git status   查看仓库当前的状态</span><br><span class="line"></span><br><span class="line">git diff   查看具体修改内容</span><br><span class="line"></span><br><span class="line">git add &lt;file&gt;   用如下命令把文件添加到仓库</span><br><span class="line"></span><br><span class="line">git commit -m <span class="string">"&lt;message&gt;"</span>   把文件提交到仓库</span><br><span class="line"></span><br><span class="line">git <span class="built_in">log</span> (--pretty=oneline)   查看提交记录（简略信息）</span><br><span class="line"></span><br><span class="line">git reset --hard HEAD^^   回退到上上个版本</span><br><span class="line"></span><br><span class="line">git reset --hard HEAD~100   回退到前100个版本</span><br><span class="line"></span><br><span class="line">git reset --hard 1094a   回退到版本号为 1094a... 的版本</span><br><span class="line"></span><br><span class="line">git reflog   查看操作记录（可查看回退前的版本号）</span><br><span class="line"></span><br><span class="line">git diff HEAD -- &lt;file&gt;   查看工作区和最新版本的区别</span><br><span class="line"></span><br><span class="line">git checkout -- r&lt;file&gt;   撤销文件在工作区的全部修改</span><br><span class="line"></span><br><span class="line">git reset HEAD &lt;file&gt;   撤销暂存区的修改，放回工作区</span><br><span class="line"></span><br><span class="line">rm &lt;file&gt;/git rm &lt;file&gt;   删除文件并放到暂存区</span><br></pre></td></tr></table></figure>
