@@ -824,6 +824,11 @@
 <td></td>
 </tr>
 <tr>
+<td>password</td>
+<td>文章密码</td>
+<td></td>
+</tr>
+<tr>
 <td>keywords</td>
 <td>文章关键字</td>
 <td></td>
