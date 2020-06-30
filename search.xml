@@ -673,7 +673,8 @@
 </ul>
 ]]></content>
       <categories>
-        <category>工具使用</category>
+        <category>工具</category>
+        <category>IDEA</category>
       </categories>
       <tags>
         <tag>IDEA</tag>
@@ -1560,7 +1561,8 @@
 </ul>
 ]]></content>
       <categories>
-        <category>工具使用</category>
+        <category>工具</category>
+        <category>Hexo</category>
       </categories>
       <tags>
         <tag>Hexo</tag>
@@ -1578,6 +1580,7 @@
 </ul>
 ]]></content>
       <categories>
+        <category>Python</category>
         <category>学习记录</category>
       </categories>
       <tags>
@@ -1661,7 +1664,9 @@
 <p>可以看到，Stream API的过滤方法也接受一个Predicate，这意味着可以将我们定制的 filter() 方法替换成写在里面的内联代码，这也是lambda表达式的魔力。</p>
 ]]></content>
       <categories>
-        <category>学习记录</category>
+        <category>Java</category>
+        <category>Java中级</category>
+        <category>Lambda</category>
       </categories>
       <tags>
         <tag>Java</tag>
@@ -1694,7 +1699,8 @@
 </blockquote>
 ]]></content>
       <categories>
-        <category>工具使用</category>
+        <category>工具</category>
+        <category>Git</category>
       </categories>
       <tags>
         <tag>Git</tag>
