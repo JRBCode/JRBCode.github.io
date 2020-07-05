@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>简析十种排序算法</title>
+    <url>/posts/b4ecf97e.html</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
+<p>排序算法可以分以下几种：<kbd>冒泡排序</kbd>、<kbd>选择排序</kbd>、<kbd>插入排序</kbd>、<kbd>希尔排序</kbd>、<kbd>归并排序</kbd>、<kbd>快速排序</kbd>、<kbd>堆排序</kbd>、<kbd>计数排序</kbd>、<kbd>桶排序</kbd>、<kbd>基数排序</kbd>。</p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p><img src="https://img-blog.csdnimg.cn/20200705223709613.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+<h1 id="动画演示"><a href="#动画演示" class="headerlink" title="动画演示"></a>动画演示</h1><h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p><img src="https://pic2.zhimg.com/50/v2-62b35f38b9806cb2e50c7e4ee0ec3386_hd.webp" alt=""></p>
+<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p><img src="https://pic3.zhimg.com/50/v2-c5e176ffc200c8f4f137e732fe860b60_hd.webp" alt=""></p>
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p><img src="https://pic4.zhimg.com/50/v2-38d6f9c006e3fdb24ffd82a58c39ca92_hd.webp" alt=""></p>
+<h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h2><p><img src="https://pic1.zhimg.com/50/v2-924c253a0ce18b65eb5d590699c8773b_hd.webp" alt=""></p>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p><img src="https://pic2.zhimg.com/50/v2-ed06651ca489ff4454e9889ca0d753db_hd.webp" alt=""></p>
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p><img src="https://pic3.zhimg.com/50/v2-e30a1dcb54af5e222243d8053d3a5a0d_hd.webp" alt=""></p>
+<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><p><img src="https://pic3.zhimg.com/50/v2-c892078dcb61230c6233fc5de4b4aebc_hd.webp" alt=""></p>
+<h2 id="计数排序"><a href="#计数排序" class="headerlink" title="计数排序"></a>计数排序</h2><p><img src="https://pic3.zhimg.com/50/v2-86055f604a687cc18e781160bcc8b781_hd.webp" alt=""></p>
+<h2 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h2><p><img src="https://pic1.zhimg.com/50/v2-ab04919ee2dbadd84ad065760b8eb1c9_hd.webp" alt=""></p>
+<h2 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h2><p><img src="https://pic4.zhimg.com/50/v2-126c359bd98e64c79a2a1db2e829e57b_hd.webp" alt=""></p>
+]]></content>
+      <categories>
+        <category>算法分析</category>
+      </categories>
+      <tags>
+        <tag>排序算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Boyer-Moore 投票算法</title>
     <url>/posts/1724aac2.html</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>

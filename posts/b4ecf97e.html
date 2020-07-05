@@ -56,23 +56,32 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="CodeHeap">
-<meta property="og:url" content="https://jrbcode.github.io/archives/2020/index.html">
+  <meta name="description" content="排序算法可以分以下几种：冒泡排序、选择排序、插入排序、希尔排序、归并排序、快速排序、堆排序、计数排序、桶排序、基数排序。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简析十种排序算法">
+<meta property="og:url" content="https://jrbcode.github.io/posts/b4ecf97e.html">
 <meta property="og:site_name" content="CodeHeap">
+<meta property="og:description" content="排序算法可以分以下几种：冒泡排序、选择排序、插入排序、希尔排序、归并排序、快速排序、堆排序、计数排序、桶排序、基数排序。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200705223709613.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://pic2.zhimg.com/50/v2-62b35f38b9806cb2e50c7e4ee0ec3386_hd.webp">
+<meta property="og:image" content="https://pic3.zhimg.com/50/v2-c5e176ffc200c8f4f137e732fe860b60_hd.webp">
+<meta property="og:image" content="https://pic4.zhimg.com/50/v2-38d6f9c006e3fdb24ffd82a58c39ca92_hd.webp">
+<meta property="og:image" content="https://pic1.zhimg.com/50/v2-924c253a0ce18b65eb5d590699c8773b_hd.webp">
+<meta property="og:image" content="https://pic2.zhimg.com/50/v2-ed06651ca489ff4454e9889ca0d753db_hd.webp">
+<meta property="og:image" content="https://pic3.zhimg.com/50/v2-e30a1dcb54af5e222243d8053d3a5a0d_hd.webp">
+<meta property="og:image" content="https://pic3.zhimg.com/50/v2-c892078dcb61230c6233fc5de4b4aebc_hd.webp">
+<meta property="og:image" content="https://pic3.zhimg.com/50/v2-86055f604a687cc18e781160bcc8b781_hd.webp">
+<meta property="og:image" content="https://pic1.zhimg.com/50/v2-ab04919ee2dbadd84ad065760b8eb1c9_hd.webp">
+<meta property="og:image" content="https://pic4.zhimg.com/50/v2-126c359bd98e64c79a2a1db2e829e57b_hd.webp">
+<meta property="article:published_time" content="2020-07-05T14:29:48.000Z">
+<meta property="article:modified_time" content="2020-07-05T14:59:05.039Z">
 <meta property="article:author" content="CodeHeap">
-<meta property="article:tag" content="技术博客">
-<meta property="article:tag" content="CodeHeap">
-<meta property="article:tag" content="Hexo">
-<meta property="article:tag" content="Next">
-<meta property="article:tag" content="Git">
-<meta property="article:tag" content="Github">
-<meta property="article:tag" content="Python">
-<meta property="article:tag" content="Java">
+<meta property="article:tag" content="排序算法">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200705223709613.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70">
 
-<link rel="canonical" href="https://jrbcode.github.io/archives/2020/">
+<link rel="canonical" href="https://jrbcode.github.io/posts/b4ecf97e.html">
 
 
 <script id="page-configurations">
@@ -80,9 +89,9 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
-    isArchive: true
+    isArchive: false
   };
 </script>
 
@@ -93,7 +102,7 @@
   
    <!--新增：鼠标点击特效-->
   <script src="/lib/live2d-widget/autoload.js"></script>   <!--新增：板娘live2d模型-->
-  <title>归档 | CodeHeap</title>
+  <title>简析十种排序算法 | CodeHeap</title>
   
 
 
@@ -223,113 +232,189 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://JRBCode.github.io/posts/b4ecf97e.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CodeHeap">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CodeHeap">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          简析十种排序算法
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-05 22:29:48 / 修改时间：22:59:05" itemprop="dateCreated datePublished" datetime="2020-07-05T22:29:48+08:00">2020-07-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/" itemprop="url" rel="index">
+                    <span itemprop="name">算法分析</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 7 篇日志。 继续努力。</span>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/posts/b4ecf97e.html#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/b4ecf97e.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>105</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2020</h1>
-    </div>
+        <blockquote>
+<p>排序算法可以分以下几种：<kbd>冒泡排序</kbd>、<kbd>选择排序</kbd>、<kbd>插入排序</kbd>、<kbd>希尔排序</kbd>、<kbd>归并排序</kbd>、<kbd>快速排序</kbd>、<kbd>堆排序</kbd>、<kbd>计数排序</kbd>、<kbd>桶排序</kbd>、<kbd>基数排序</kbd>。</p>
+</blockquote>
+<a id="more"></a>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-05T22:29:48+08:00"
-              content="2020-07-05">
-          07-05
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/posts/b4ecf97e.html" itemprop="url">
-            <span itemprop="name">简析十种排序算法</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-04T17:15:22+08:00"
-              content="2020-07-04">
-          07-04
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/posts/1724aac2.html" itemprop="url">
-            <span itemprop="name">Boyer-Moore 投票算法</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-30T10:25:16+08:00"
-              content="2020-06-30">
-          06-30
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/posts/5e63e6f3.html" itemprop="url">
-            <span itemprop="name">IntelliJ IDEA 快捷键说明大全</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-02-11T20:03:34+08:00"
-              content="2020-02-11">
-          02-11
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/posts/63c4b34f.html" itemprop="url">
-            <span itemprop="name">Hexo+NexT博客搭建</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p><img src="https://img-blog.csdnimg.cn/20200705223709613.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+<h1 id="动画演示"><a href="#动画演示" class="headerlink" title="动画演示"></a>动画演示</h1><h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p><img src="https://pic2.zhimg.com/50/v2-62b35f38b9806cb2e50c7e4ee0ec3386_hd.webp" alt=""></p>
+<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p><img src="https://pic3.zhimg.com/50/v2-c5e176ffc200c8f4f137e732fe860b60_hd.webp" alt=""></p>
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p><img src="https://pic4.zhimg.com/50/v2-38d6f9c006e3fdb24ffd82a58c39ca92_hd.webp" alt=""></p>
+<h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h2><p><img src="https://pic1.zhimg.com/50/v2-924c253a0ce18b65eb5d590699c8773b_hd.webp" alt=""></p>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p><img src="https://pic2.zhimg.com/50/v2-ed06651ca489ff4454e9889ca0d753db_hd.webp" alt=""></p>
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p><img src="https://pic3.zhimg.com/50/v2-e30a1dcb54af5e222243d8053d3a5a0d_hd.webp" alt=""></p>
+<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><p><img src="https://pic3.zhimg.com/50/v2-c892078dcb61230c6233fc5de4b4aebc_hd.webp" alt=""></p>
+<h2 id="计数排序"><a href="#计数排序" class="headerlink" title="计数排序"></a>计数排序</h2><p><img src="https://pic3.zhimg.com/50/v2-86055f604a687cc18e781160bcc8b781_hd.webp" alt=""></p>
+<h2 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h2><p><img src="https://pic1.zhimg.com/50/v2-ab04919ee2dbadd84ad065760b8eb1c9_hd.webp" alt=""></p>
+<h2 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h2><p><img src="https://pic4.zhimg.com/50/v2-126c359bd98e64c79a2a1db2e829e57b_hd.webp" alt=""></p>
 
     </div>
+
+    
+    
+    
+      
+        <div class="reward-container">
+  <div>感谢您的支持！</div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="CodeHeap 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="CodeHeap 支付宝">
+        <p>支付宝</p>
+      </div>
+
   </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>CodeHeap
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://jrbcode.github.io/posts/b4ecf97e.html" title="简析十种排序算法">https://jrbcode.github.io/posts/b4ecf97e.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="tag"># 排序算法</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/posts/1724aac2.html" rel="next" title="Boyer-Moore 投票算法">
+                  <i class="fa fa-chevron-left"></i> Boyer-Moore 投票算法
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
   
   
   
 
-  
-
+  </div>
 
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -354,6 +439,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度"><span class="nav-number">1.</span> <span class="nav-text">复杂度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动画演示"><span class="nav-number">2.</span> <span class="nav-text">动画演示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#冒泡排序"><span class="nav-number">2.1.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择排序"><span class="nav-number">2.2.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入排序"><span class="nav-number">2.3.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#希尔排序"><span class="nav-number">2.4.</span> <span class="nav-text">希尔排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归并排序"><span class="nav-number">2.5.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速排序"><span class="nav-number">2.6.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆排序"><span class="nav-number">2.7.</span> <span class="nav-text">堆排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计数排序"><span class="nav-number">2.8.</span> <span class="nav-text">计数排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#桶排序"><span class="nav-number">2.9.</span> <span class="nav-text">桶排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基数排序"><span class="nav-number">2.10.</span> <span class="nav-text">基数排序</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
