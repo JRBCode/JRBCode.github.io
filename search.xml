@@ -147,7 +147,7 @@
 </tbody></table>
 <figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">项目     <span class="string">| Value</span></span><br><span class="line">-------- <span class="string">| -----</span></span><br><span class="line">电脑  <span class="string">| $1600</span></span><br><span class="line">手机  <span class="string">| $12</span></span><br><span class="line">导管  <span class="string">| $1</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="设定内容居中-居左-居右"><a href="#设定内容居中-居左-居右" class="headerlink" title="设定内容居中/居左/居右"></a>设定内容居中/居左/居右</h2><p>使用<code>:---------:</code>居中<br>使用<code>:----------</code>居左<br>使用<code>----------:</code>居右<br>| 第一列       | 第二列         | 第三列        |<br>|:———–:| ————-:|:————-|<br>| 第一列文本居中 | 第二列文本居右  | 第三列文本居左 | </p>
+<h2 id="设定内容居中-居左-居右"><a href="#设定内容居中-居左-居右" class="headerlink" title="设定内容居中/居左/居右"></a>设定内容居中/居左/居右</h2><p>使用<code>:---------:</code>居中<br>使用<code>:----------</code>居左<br>使用<code>----------:</code>居右</p>
 <figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">| 第一列       | 第二列         | 第三列        |</span><br><span class="line">|<span class="symbol">:-----------</span><span class="symbol">:|</span> -------------<span class="symbol">:|</span><span class="symbol">:-------------|</span></span><br><span class="line">| 第一列文本居中 | 第二列文本居右  | 第三列文本居左 |</span><br></pre></td></tr></table></figure>
 
 <h2 id="SmartyPants"><a href="#SmartyPants" class="headerlink" title="SmartyPants"></a>SmartyPants</h2><p>SmartyPants将ASCII标点字符转换为“智能”印刷标点HTML实体。例如：</p>
@@ -180,8 +180,7 @@
 <h1 id="创建一个自定义列表"><a href="#创建一个自定义列表" class="headerlink" title="创建一个自定义列表"></a>创建一个自定义列表</h1><p><img src="https://img-blog.csdnimg.cn/20200706142841637.png" alt=""></p>
 <figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">Markdown</span><br><span class="line">:  <span class="type">Text</span>-<span class="keyword">to</span>-HTML <span class="keyword">conversion</span> tool</span><br><span class="line"></span><br><span class="line">Authors</span><br><span class="line">:  John</span><br><span class="line">:  Luke</span><br></pre></td></tr></table></figure>
 
-<h1 id="创建一个注脚"><a href="#创建一个注脚" class="headerlink" title="创建一个注脚"></a>创建一个注脚</h1><p>一个具有注脚的文本。[^2]</p>
-<p><img src="https://img-blog.csdnimg.cn/20200706142916499.png" alt=""></p>
+<h1 id="创建一个注脚"><a href="#创建一个注脚" class="headerlink" title="创建一个注脚"></a>创建一个注脚</h1><p><img src="https://img-blog.csdnimg.cn/20200706142916499.png" alt=""></p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">一个具有注脚的文本。[^2]</span><br><span class="line"></span><br><span class="line">[<span class="symbol">^2</span>]: <span class="link">注脚的解释</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="添加注释"><a href="#添加注释" class="headerlink" title="添加注释"></a>添加注释</h1><p><img src="https://img-blog.csdnimg.cn/20200706142945193.png" alt=""></p>
@@ -220,8 +219,12 @@
 </ul>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">- </span>关于 <span class="strong">**Flowchart流程图**</span> 语法，参考 [<span class="string">这儿</span>][<span class="symbol">4</span>].</span><br></pre></td></tr></table></figure>
 
-<h1 id="导出与导入"><a href="#导出与导入" class="headerlink" title="导出与导入"></a>导出与导入</h1><h2 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h2><p>如果你想尝试使用此编辑器, 你可以在此篇文章任意编辑。当你完成了一篇文章的写作, 在上方工具栏找到 <strong>文章导出</strong> ，生成一个.md文件或者.html文件进行本地保存。</p>
-<h2 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h2><p>如果你想加载一篇你写过的.md文件，在上方工具栏可以选择导入功能进行对应扩展名的文件导入，<br>继续你的创作。</p>
+<h1 id="导出与导入"><a href="#导出与导入" class="headerlink" title="导出与导入"></a>导出与导入</h1><h2 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h2><blockquote>
+<p>如果你想尝试使用此编辑器, 你可以在此篇文章任意编辑。当你完成了一篇文章的写作, 在上方工具栏找到 <strong>文章导出</strong> ，生成一个.md文件或者.html文件进行本地保存。</p>
+</blockquote>
+<h2 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h2><blockquote>
+<p>如果你想加载一篇你写过的.md文件，在上方工具栏可以选择导入功能进行对应扩展名的文件导入，续你的创作。</p>
+</blockquote>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="symbol">1</span>]: <span class="link">http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference</span></span><br><span class="line">[<span class="symbol">2</span>]: <span class="link">https://mermaidjs.github.io/</span></span><br><span class="line">[<span class="symbol">3</span>]: <span class="link">https://mermaidjs.github.io/</span></span><br><span class="line">[<span class="symbol">4</span>]: <span class="link">http://adrai.github.io/flowchart.js/</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>工具使用</category>
