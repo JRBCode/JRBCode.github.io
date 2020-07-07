@@ -243,17 +243,17 @@
 <a id="more"></a>
 
 <h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><ol>
-<li><p>排序定义</p>
+<li>排序定义</li>
+</ol>
 <blockquote>
 <p>对一序列对象根据某个关键字进行排序。</p>
 </blockquote>
-</li>
-<li><p>术语说明</p>
+<ol>
+<li>术语说明</li>
+</ol>
 <blockquote>
 <p>稳定 ：如果a原本在b前面，而a=b，排序之后a仍然在b的前面；<br>不稳定 ：如果a原本在b的前面，而a=b，排序之后a可能会出现在b的后面；<br>内排序 ：所有排序操作都在内存中完成；<br>外排序 ：由于数据太大，因此把数据放在磁盘中，而排序通过磁盘和内存的数据传输才能进行；<br>时间复杂度 ： 一个算法执行所耗费的时间。<br>空间复杂度 ：运行完一个程序所需内存的大小。</p>
 </blockquote>
-</li>
-</ol>
 <h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p><img src="https://img-blog.csdnimg.cn/20200705223709613.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
 <blockquote>
 <p><strong>图片名词解释</strong>：</p>
@@ -389,7 +389,7 @@
 <ol start="2">
 <li>过程演示</li>
 </ol>
-<p><img src="https://img-blog.csdnimg.cn/20200707153128339.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt="">))</p>
+<p><img src="https://img-blog.csdnimg.cn/20200707153128339.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
 <ol start="3">
 <li>代码实现</li>
 </ol>
@@ -546,7 +546,7 @@
 <ol start="2">
 <li>图片演示</li>
 </ol>
-<p><img src="https://img-blog.csdnimg.cn/20200707155047185.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt="">))</p>
+<p><img src="https://img-blog.csdnimg.cn/20200707155047185.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
 <ol start="3">
 <li>代码实现</li>
 </ol>
