@@ -1,6 +1,262 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Java反射机制</title>
+    <url>/posts/29f40393.html</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
+</blockquote>
+<a id="more"></a>
+
+
+<h1 id="反射概念"><a href="#反射概念" class="headerlink" title="反射概念"></a>反射概念</h1><blockquote>
+<p>在运行状态中，对于任意一个类，都能够获取到这个类的所有属性和方法，对于任意一个对象，都能够调用它的任意一个方法和属性(包括私有的方法和属性)，这种动态获取的信息以及动态调用对象的方法的功能就称为java语言的<kbd>反射机制</kbd>。通俗点讲，通过反射，该类对我们来说是完全透明的，想要获取任何东西都可以。</p>
+<p>想要使用反射机制，就必须要先获取到该类的<code>字节码文件对象</code>(.class)，通过字节码文件对象，就能够通过该类中的方法获取到我们想要的所有信息(方法，属性，类名，父类名，实现的所有接口等等)，每一个类对应着一个字节码文件也就对应着一个Class类型的对象，也就是字节码文件对象。</p>
+</blockquote>
+<p><strong>获取字节码文件对象的三种方式</strong>：</p>
+<ol>
+<li>第一种方式–&gt;Class.forName(“类名字符串”)。</li>
+</ol>
+<blockquote>
+<p>通过Class类中的静态方法forName，直接获取到一个类的字节码文件对象，此时该类还是源文件阶段，并没有变为字节码文件。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class c1=Class.forName(<span class="string">"csdn.Student"</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>第二种方式–&gt;先创建对象,再用对象调用getClass()方法，即实例对象.getClass().返回运行时类。</li>
+</ol>
+<blockquote>
+<p>通过类的实例获取该类的字节码文件对象，该类处于创建对象阶段,任何一个java对象都有getClass()方法</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Student s=<span class="keyword">new</span> Student();</span><br><span class="line">Class c2 = s.getClass();</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>第三种方式–&gt;类名.class。返回Class的对象。(每个类都有class属性)</li>
+</ol>
+<blockquote>
+<p>当类被加载成.class文件时，此时Person类变成了.class，在获取该字节码文件对象，也就是获取自己， 该类处于字节码阶段。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class c3=Student<span class="class">.<span class="keyword">class</span></span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>有了字节码文件对象才能获得类中所有的信息，我们在使用反射获取信息时，也要考虑使用上面哪种方式获取字节码对象合理，视不同情况而定。下面介绍Class类的功能。</p>
+</blockquote>
+<h1 id="反射机制能获取的信息"><a href="#反射机制能获取的信息" class="headerlink" title="反射机制能获取的信息"></a>反射机制能获取的信息</h1><h2 id="通过字节码对象创建实例对象"><a href="#通过字节码对象创建实例对象" class="headerlink" title="通过字节码对象创建实例对象"></a>通过字节码对象创建实例对象</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//注:类名字符串是"包名+类名" 返回Class的对象。(这种是最常用的方法)</span></span><br><span class="line">Class c1=Class.forName(<span class="string">"csdn.Student"</span>);</span><br><span class="line"><span class="comment">// 创建student实例，通过student的无参构造方法</span></span><br><span class="line">Student stu = (Student)c1.newInstance();</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取构造器方法"><a href="#获取构造器方法" class="headerlink" title="获取构造器方法"></a>获取构造器方法</h2><blockquote>
+<p>constructor 如果没有无参构造，只有有参构造如何创建实例呢？看下面</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>返回值类型</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>getConstructors()</td>
+<td>Constructor型数组</td>
+<td>获得所有权限为public的构造方法</td>
+</tr>
+<tr>
+<td>getConstructor(Class &lt;?&gt;.. paramsTypes)</td>
+<td>Constructor对象</td>
+<td>获得权限为public的指定构造方法</td>
+</tr>
+<tr>
+<td>getDeclaredConstructors()</td>
+<td>Constructor型数组</td>
+<td>返回此Class对象表示的类声明的所有构造方法。</td>
+</tr>
+<tr>
+<td>getDeclaredConstructor(Class&lt;?&gt;.. paramsTypes)</td>
+<td>Constructor对象</td>
+<td>返回此Class对象所表示的类的指定构造方法。</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> <span class="comment">//获取字节码文件</span></span><br><span class="line"><span class="number">2</span> Class clazz1=Class.forName(<span class="string">"csdn.Student"</span>);</span><br><span class="line"><span class="number">3</span> <span class="comment">//先获取有参构造器，parameterTypes;表示参数列表，有多少写多少，也可以不写，不写就是调用无参构造器</span></span><br><span class="line"><span class="number">4</span> Constructor constructor = clazz1.getConstructor(<span class="keyword">int</span><span class="class">.<span class="keyword">class</span>,<span class="title">String</span>.<span class="title">class</span>)</span>;</span><br><span class="line"><span class="number">5</span> <span class="comment">//通过构造器来实例化对象，将实际的参数传进去</span></span><br><span class="line"><span class="number">6</span> Student student = (Student)constructor.newInstance(<span class="string">"小明"</span>，<span class="number">12</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>总结上面创建实例对象：Class类的<code>newInstance()</code>方法是使用该类无参的构造函数创建对象, 如果一个类没有无参的构造函数, 就不能这样创建了,可以调用Class类的<code>getConstructor(String.class,int.class)</code>方法获取一个指定的构造函数然后再调用Constructor类的n<code>ewInstance(&quot;张三&quot;,20)</code>方法创建对象</p>
+</blockquote>
+<ul>
+<li><strong>获取全部构造方法</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class clazz1 = Class.forName(<span class="string">"Reflect.Student"</span>);</span><br><span class="line"><span class="comment">//获取所有的构造方法</span></span><br><span class="line">Constructor[] constructors = clazz1.getConstructors();</span><br><span class="line"><span class="comment">//遍历所有的构造方法</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i= <span class="number">0</span>;i&lt;constructors.length;i++) &#123;</span><br><span class="line">    <span class="comment">//获取每个构造函数中的参数类型字节码</span></span><br><span class="line">    Class[] parameterTypes = constructors[i].getParameterTypes();</span><br><span class="line">    <span class="comment">//获取构造函数中参数类型</span></span><br><span class="line">    System.out.println(<span class="string">"第"</span>+i+<span class="string">"个构造函数"</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;parameterTypes.length;j++) &#123;</span><br><span class="line">        <span class="comment">//获取构造函数中参数类型</span></span><br><span class="line">        System.out.println(parameterTypes[j].getName()+<span class="string">","</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取成员变量并使用Field对象"><a href="#获取成员变量并使用Field对象" class="headerlink" title="获取成员变量并使用Field对象"></a>获取成员变量并使用Field对象</h2><table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>返回值类型</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>getFields()</td>
+<td>Field型数组</td>
+<td>获得所有权限为public的成员变量</td>
+</tr>
+<tr>
+<td>getField(String name)</td>
+<td>Field对象</td>
+<td>获得权限为public的指定成员变量</td>
+</tr>
+<tr>
+<td>getDeclaredFields()</td>
+<td>Field型数组</td>
+<td>返回此Class对象所表示的实体的所有成员变量，但不包括继承的属性</td>
+</tr>
+<tr>
+<td>getDeclaredField(String name)</td>
+<td>Field对象</td>
+<td>它返回此Class对象所表示的类或接口的指定已声明成员变量</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>获取指定成员变量</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class clazz1 = Class.forName(<span class="string">"Reflect.Student"</span>);</span><br><span class="line"><span class="comment">//获取其实例对象</span></span><br><span class="line">Student student = (Student)clazz1.newInstance();</span><br><span class="line"><span class="comment">//获取成员变量clazz1.getField(name);通过name来获取指定成员变量，如果该成员变量是私有的，则应该使用getDeclaredField(name);</span></span><br><span class="line">Field field = clazz1.getDeclaredField(<span class="string">"id"</span>);</span><br><span class="line"><span class="comment">//对其成员变量进行操作</span></span><br><span class="line"><span class="comment">//赋值操作</span></span><br><span class="line">field.setInt(student, <span class="number">1</span>);</span><br><span class="line"><span class="comment">//获取成员变量的值，field.get(obj);obj为所表示字段的值的对象，也就是该属性对应诶的实例对象。</span></span><br><span class="line">System.out.println(field.getInt(student));</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>Class.getField(String)</code>方法可以获取类中的指定字段(可见的), 如果是私有的可以用<code>getDeclaedField(&quot;name&quot;)</code>方法获取,通过<code>set(obj, &quot;李四&quot;)</code>方法可以设置指定对象上该字段的值, 如果是私有的需要先调用<code>setAccessible(true)</code>设置访问权限,用获取的指定的字段调用<code>get(obj)</code>可以获取指定对象中该字段的值.</p>
+</blockquote>
+<ul>
+<li><strong>获取全部成员变量</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 通过反射获得字节码文件对象</span></span><br><span class="line">Class clazz1 = Class.forName(<span class="string">"Reflect.Student"</span>);</span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line">Student student = (Student) clazz1.newInstance();</span><br><span class="line"><span class="comment">// 赋值操作</span></span><br><span class="line">student.setId(<span class="number">3</span>);</span><br><span class="line">student.setName(<span class="string">"zhangsan"</span>);</span><br><span class="line"><span class="comment">// 将私有的属性一并获取</span></span><br><span class="line">Field[] fields = clazz1.getDeclaredFields();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; fields.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 打开操作权限</span></span><br><span class="line">    fields[i].setAccessible(<span class="keyword">true</span>);</span><br><span class="line">    <span class="comment">// 获取成员变量的值</span></span><br><span class="line">    System.out.println(fields[i].get(student));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="获得方法并使用Method"><a href="#获得方法并使用Method" class="headerlink" title="获得方法并使用Method"></a>获得方法并使用Method</h2><table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>返回值类型</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>getMethodsQ)</td>
+<td>Method型数组</td>
+<td>获得所有权限为public的方法</td>
+</tr>
+<tr>
+<td>getMethod(String name,Class Class&lt;?&gt;.. paramsTypes)</td>
+<td>Method对象</td>
+<td>获得权限为public的指定方法</td>
+</tr>
+<tr>
+<td>getDeclaredMethodsQ</td>
+<td>Method型数组</td>
+<td>返回此Class 对象表示的实体的所有方法， 但不包括继承的方法。</td>
+</tr>
+<tr>
+<td>getDeclaredMethod(String name,Class Class&lt;?&gt;.. paramsTypes)</td>
+<td>Method对象</td>
+<td>返回此Class对象所表示的实体的指定公共成员方法，name指定方法名称，parameterTypes指定方 法参数类型。</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 通过反射获得字节码文件对象</span></span><br><span class="line">Class clazz1 = Class.forName(<span class="string">"Reflect.Student"</span>);</span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line">Student student = (Student) clazz1.newInstance();</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* clazz1.clazz1.getMethod(name, parameterTypes)</span></span><br><span class="line"><span class="comment">*   name 方法的名字</span></span><br><span class="line"><span class="comment">*   parameterTypes：方法的参数类型为Class类型，没有则不填写，比如参数为String，则填写为String.Class</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//eat为不带参数的public方法</span></span><br><span class="line">Method method = clazz1.getMethod(<span class="string">"eat"</span>);</span><br><span class="line">Method method1 = clazz1.getMethod(<span class="string">"sing"</span>, String<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* method.invoke(obj, args)</span></span><br><span class="line"><span class="comment">*   obj:方法的对象</span></span><br><span class="line"><span class="comment">*   args:是的参数值，没有则不填</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//调用方法</span></span><br><span class="line">method.invoke(student);</span><br><span class="line">method1.invoke(student, <span class="string">"呵呵"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取私有的方法，和获取属性一样，say为私有的方法</span></span><br><span class="line">Method method2 = clazz1.getDeclaredMethod(<span class="string">"say"</span>);</span><br><span class="line">method2.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">method2.invoke(student);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>Class.getMethod(String, Class...)</code> 和 <code>Class.getDeclaredMethod(String, Class...)</code>方法可以获取类中的指定方法,如果为私有方法，则需要打开一个权限。<code>setAccessible(true)</code>;用<code>invoke(Object, Object...)</code>可以调用该方法，</p>
+</blockquote>
+<ul>
+<li><strong>获取全部方法</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 通过反射获得字节码文件对象</span></span><br><span class="line">Class clazz1 = Class.forName(<span class="string">"Reflect.Student"</span>);</span><br><span class="line">Method[] methods = clazz1.getDeclaredMethods();</span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line">Student student = (Student) clazz1.newInstance();</span><br><span class="line"><span class="keyword">for</span>(Method method :methods) &#123;</span><br><span class="line">    method.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">    System.out.println(method.getName());</span><br><span class="line">    <span class="comment">//获得方法的参数，又回到了之前的代码</span></span><br><span class="line">    Class&lt;?&gt;[] parameterTypes = method.getParameterTypes();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;parameterTypes.length;i++) &#123;</span><br><span class="line">        <span class="comment">//获取构造函数中参数类型</span></span><br><span class="line">        System.out.println(parameterTypes[i].getName()+<span class="string">","</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="获得该类的所有接口"><a href="#获得该类的所有接口" class="headerlink" title="获得该类的所有接口"></a>获得该类的所有接口</h2><blockquote>
+<p><code>Class[]　getInterfaces()</code>：确定此对象所表示的类或接口实现的接口</p>
+<p>返回值：接口的字节码文件对象的数组</p>
+</blockquote>
+<h2 id="获取指定资源的输入流"><a href="#获取指定资源的输入流" class="headerlink" title="获取指定资源的输入流"></a>获取指定资源的输入流</h2><blockquote>
+<p>InputStream getResourceAsStream(String name)</p>
+<p>return：一个 InputStream 对象；如果找不到带有该名称的资源，则返回 null</p>
+<p>参数：所需资源的名称，如果以”/“开始，则绝对资源名为”/“后面的一部分。</p>
+</blockquote>
+<h2 id="动态代理的概述和实现"><a href="#动态代理的概述和实现" class="headerlink" title="动态代理的概述和实现"></a>动态代理的概述和实现</h2><blockquote>
+<p><code>动态代理</code>：一种设计模式，其非常简单，很容易理解，你自己可以做这件事，但是觉得自己做非常麻烦或者不方便，所以就叫一个另一个人(代理)来帮你做这个事情，而你就不用管了，这就是动态代理。举个例子，买火车票叫人代买。</p>
+<p>在程序运行过程中产生的这个对象,而程序运行过程中产生对象其实就是我们刚才反射讲解的内容，所以，动态代理其实就是通过反射来生成一个代理</p>
+<p>在Java中java.lang.reflect包下提供了一个Proxy类和一个InvocationHandler接口，通过使用这个类和接口就可以生成动态代理对象。JDK提供的代理只能针对接口做代理。我们有更强大的代理cglib，Proxy类中的方法创建动态代理类对象分三步，但是注意JDK提供的代理正能针对接口做代理，也就是下面的第二步返回的必须要是一个接口。</p>
+</blockquote>
+<ol>
+<li>new出代理对象，通过实现InvacationHandler接口，然后new出代理对象来。</li>
+<li>通过Proxy类中的静态方法newProxyInstance，来将代理对象假装成那个被代理的对象，也就是如果叫人帮我们代买火车票一样，那个代理就假装成我们自己本人</li>
+<li>执行方法，代理成功</li>
+</ol>
+<p>将代理对象中的内容进行实现</p>
+<p><img src="https://img-blog.csdnimg.cn/20200712231947917.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/20200712232002314.png" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/20200712232024172.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/20200712232131649.png" alt=""></p>
+<p><strong>注意</strong>：newProxyInstance的三个参数，第一个，类加载器，第二个被代理对象的接口，第三个代理对象。</p>
+<h2 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h2><blockquote>
+<p>还有很多方法，比如获得类加载器，等等。具体还需要别的，就通过查看API文档来解决。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>方法声明</th>
+<th>返回值类型</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>getName()</td>
+<td>String对象</td>
+<td>返回此Class对象所表示的实体全限定名称</td>
+</tr>
+<tr>
+<td>newInstance()</td>
+<td>类对象</td>
+<td>创建Class对象所表示的类的一个新实例</td>
+</tr>
+<tr>
+<td>getInterfaces()</td>
+<td>Class型数组</td>
+<td>获得该类实现的所有接口</td>
+</tr>
+<tr>
+<td>getPackage0)</td>
+<td>Package对象</td>
+<td>获得此类的包</td>
+</tr>
+</tbody></table>
+<h1 id="反射机制的应用实例"><a href="#反射机制的应用实例" class="headerlink" title="反射机制的应用实例"></a>反射机制的应用实例</h1><ol>
+<li>利用反射，在泛型为int的arryaList集合中存放一个String类型的对象</li>
+</ol>
+<p>原理：集合中的泛型只在编译器有效，而到了运行期，泛型则会失效，</p>
+<p><img src="https://img-blog.csdnimg.cn/20200712232537675.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+<ol>
+<li>利用反射，简化编写Servlet的个数。</li>
+</ol>
+<blockquote>
+<p>什么意思呢？每当我们写一个功能时，就需要写一个对应的Servlet，导致最后Servlet有很多，自己都看不过来，所以对其进行了优化，两种方式，</p>
+</blockquote>
+<ul>
+<li>每次从页面传过来一个参数，method=”xxx”; 然后编写一个Servlet，获得其参数method的值，进行判断，如果是add，则调用add方法，如果是delete，则调用delete方法，这样就可以写在一个servlet中实现所有的功能了。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/2020071223271593.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+<ul>
+<li>利用反射编写一个BaseServlet继承HttpServlet，这是一个通用的BaseServlet。需要明白servlet的生命周期</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/2020071223280132.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+<p>编写具体实现的方法servlet类。<br>MySerlvet001 extends BaseServlet</p>
+<p><img src="https://img-blog.csdnimg.cn/2020071223283184.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+<blockquote>
+<p>解释：需要明白servlet的生命周期，也就是service方法，因为是servlet，所以在访问的时候，会经过service方法，而子类MyServlet001中并没有，所以就到父类BaseServlet中找,发现有，然后获取参数即知道了需要调用什么方法，因为方法的编写都在子类中，所以通过反射，获取到子类中对应的方法并运行，其中需要注意的是this这个参数在BaseServlet中的用法。需要理解它。才能理解我们这个程序。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>学习记录</category>
+        <category>Java</category>
+        <category>Java高级</category>
+      </categories>
+      <tags>
+        <tag>Java反射机制</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java注解简介</title>
     <url>/posts/7aaf7bcb.html</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
@@ -3266,7 +3522,7 @@
   <entry>
     <title>Hexo+NexT博客搭建</title>
     <url>/posts/63c4b34f.html</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://img-blog.csdnimg.cn/20200212234919772.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://img-blog.csdnimg.cn/20200712223249386.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
 <a id="more"></a>
 
 
@@ -4154,7 +4410,7 @@
   <entry>
     <title>Python学习(小甲鱼)</title>
     <url>/posts/d8fb208b.html</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://img-blog.csdnimg.cn/20200213000329775.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://img-blog.csdnimg.cn/20200712183020633.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
 <a id="more"></a>
 
 <ul>
