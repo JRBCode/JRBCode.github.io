@@ -1,10 +1,370 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Java注解简介</title>
+    <url>/posts/7aaf7bcb.html</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
+<p>本文首先简单介绍Java的<code>基本注解</code>，然后借助<code>自定义注解</code>的方式，帮助大家理解 <code>Hibernate</code>，<code>Spring</code>, <code>Struts</code>等等<code>第三方注解</code>是如何工作的。</p>
+</blockquote>
+<a id="more"></a>
+
+
+<h1 id="基本内置注解"><a href="#基本内置注解" class="headerlink" title="基本内置注解"></a>基本内置注解</h1><h2 id="Override"><a href="#Override" class="headerlink" title="@Override"></a>@Override</h2><blockquote>
+<p><kbd>@Override</kbd> 用在方法上，表示这个方法重写了父类的方法，如<code>toString()</code>。</p>
+<p>如果父类没有这个方法，那么就无法编译通过，如例所示，在fromString()方法上加上@Override 注解，就会失败，因为Hero类的父类Object，并没有fromString方法</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> annotation;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hero</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    String name;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">fromString</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Deprecated"><a href="#Deprecated" class="headerlink" title="@Deprecated"></a>@Deprecated</h2><blockquote>
+<p><kbd>@Deprecated</kbd> 表示这个方法已经过期，不建议开发者使用。(暗示在将来某个不确定的版本，就有可能会取消掉)</p>
+</blockquote>
+<p>如例所示，开地图这个方法hackMap，被注解为过期，在调用的时候，就会受到提示</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> annotation;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hero</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    String name;</span><br><span class="line">     </span><br><span class="line">    <span class="meta">@Deprecated</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hackMap</span><span class="params">()</span></span>&#123;</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Hero().hackMap();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="SuppressWarnings"><a href="#SuppressWarnings" class="headerlink" title="@SuppressWarnings"></a>@SuppressWarnings</h2><blockquote>
+<p><kbd>@SuppressWarnings</kbd> Suppress英文的意思是抑制的意思，这个注解的用处是忽略警告信息。</p>
+</blockquote>
+<p>比如大家使用集合的时候，有时候为了偷懒，会不写泛型，像这样：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List heros = <span class="keyword">new</span> ArrayList();</span><br></pre></td></tr></table></figure>
+
+<p>那么就会导致编译器出现警告，而加上</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings</span>(&#123; <span class="string">"rawtypes"</span>, <span class="string">"unused"</span> &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>就对这些警告进行了抑制，即忽略掉这些警告信息。<br>@SuppressWarnings 有常见的值，分别对应如下意思：</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>deprecation</td>
+<td>使用了不赞成使用的类或方法时的警告(使用@Deprecated使得编译器产生的警告)；</td>
+</tr>
+<tr>
+<td>unchecked</td>
+<td>执行了未检查的转换时的警告，例如当使用集合时没有用泛型 (Generics) 来指定集合保存的类型; 关闭编译器警告</td>
+</tr>
+<tr>
+<td>fallthrough</td>
+<td>当 Switch 程序块直接通往下一种情况而没有 Break 时的警告;</td>
+</tr>
+<tr>
+<td>path</td>
+<td>在类路径、源文件路径等中有不存在的路径时的警告;</td>
+</tr>
+<tr>
+<td>serial</td>
+<td>当在可序列化的类上缺少 serialVersionUID 定义时的警告;</td>
+</tr>
+<tr>
+<td>finally</td>
+<td>任何 finally 子句不能正常完成时的警告;</td>
+</tr>
+<tr>
+<td>rawtypes</td>
+<td>泛型类型未指明</td>
+</tr>
+<tr>
+<td>unused</td>
+<td>引用定义了，但是没有被使用</td>
+</tr>
+<tr>
+<td>all</td>
+<td>关于以上所有情况的警告。</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> annotation;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hero</span> </span>&#123;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="meta">@SuppressWarnings</span>(&#123; <span class="string">"rawtypes"</span>, <span class="string">"unused"</span> &#125;)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        List heros = <span class="keyword">new</span> ArrayList();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="SafeVarargs"><a href="#SafeVarargs" class="headerlink" title="@SafeVarargs"></a>@SafeVarargs</h2><blockquote>
+<p><kbd>@SafeVarargs</kbd> 这是1.7 之后新加入的基本注解. 如例所示，当使用可变数量的参数的时候，而参数的类型又是泛型T的话，就会出现警告。 这个时候，就使用@SafeVarargs来去掉这个警告</p>
+<p><kbd>@SafeVarargs</kbd>注解只能用在参数长度可变的方法或构造方法上，且方法必须声明为static或final，否则会出现编译错误。一个方法使用@SafeVarargs注解的前提是，开发人员必须确保这个方法的实现中对泛型类型参数的处理不会引发类型安全问题。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> annotation;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hero</span> </span>&#123;</span><br><span class="line">    String name;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@SafeVarargs</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">getFirstOne</span><span class="params">(T... elements)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> elements.length &gt; <span class="number">0</span> ? elements[<span class="number">0</span>] : <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="FunctionalInterface"><a href="#FunctionalInterface" class="headerlink" title="@FunctionalInterface"></a>@FunctionalInterface</h2><blockquote>
+<p><kbd>@FunctionalInterface</kbd>这是Java1.8 新增的注解，用于约定函数式接口。</p>
+<p>函数式接口概念： 如果接口中只有一个抽象方法（可以包含多个默认方法或多个static方法），该接口称为函数式接口。函数式接口其存在的意义，主要是配合Lambda 表达式 来使用。</p>
+</blockquote>
+<p>如例所示，AD接口只有一个adAttack方法，那么就可以被注解为@FunctionalInterface,而AP接口有两个方法apAttack()和apAttack2(),那么就不能被注解为函数式接口：</p>
+<ul>
+<li>AD.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> annotation;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AD</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">adAttack</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>AP.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> annotation;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AP</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">apAttack</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">apAttack2</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h1><h2 id="非注解方式DBUtil"><a href="#非注解方式DBUtil" class="headerlink" title="非注解方式DBUtil"></a>非注解方式DBUtil</h2><blockquote>
+<p>通常来讲，在一个基于JDBC开发的项目里，都会有一个<code>DBUtil</code>这么一个类，在这个类里统一提供连接数据库的IP地址，端口，数据库名称， 账号，密码，编码方式等信息。如例所示，在这个DBUtil类里，这些信息，就是以属性的方式定义在类里的。</p>
+</blockquote>
+<p>下例运行结果是获取一个连接数据库test的连接Connection实例。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> util;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DBUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> String ip = <span class="string">"127.0.0.1"</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> port = <span class="number">3306</span>;</span><br><span class="line">    <span class="keyword">static</span> String database = <span class="string">"test"</span>;</span><br><span class="line">    <span class="keyword">static</span> String encoding = <span class="string">"UTF-8"</span>;</span><br><span class="line">    <span class="keyword">static</span> String loginName = <span class="string">"root"</span>;</span><br><span class="line">    <span class="keyword">static</span> String password = <span class="string">"admin"</span>;</span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        String url = String.format(<span class="string">"jdbc:mysql://%s:%d/%s?characterEncoding=%s"</span>, ip, port, database, encoding);</span><br><span class="line">        <span class="keyword">return</span> DriverManager.getConnection(url, loginName, password);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        System.out.println(getConnection());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注</strong>： 运行需要用到连接mysql的jar包。</p>
+<h2 id="自定义注解-JDBCConfig"><a href="#自定义注解-JDBCConfig" class="headerlink" title="自定义注解@JDBCConfig"></a>自定义注解@JDBCConfig</h2><blockquote>
+<p>接下来，就要把DBUtil这个类改造成为支持自定义注解的方式。 首先创建一个注解JDBCConfig</p>
+</blockquote>
+<ol>
+<li>创建注解类型的时候即不使用class也不使用interface,而是使用@interface</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> JDBCConfig</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>元注解</li>
+</ol>
+<ul>
+<li><kbd>@Target({METHOD,TYPE})</kbd> 表示这个注解可以用用在类/接口上，还可以用在方法上</li>
+<li><kbd>@Retention(RetentionPolicy.RUNTIME)</kbd> 表示这是一个运行时注解，即运行起来之后，才获取注解中的相关信息，而不像基本注解如@Override 那种不用运行，在编译时eclipse就可以进行相关工作的编译时注解。</li>
+<li><kbd>@Inherited</kbd> 表示这个注解可以被子类继承</li>
+<li><kbd>@Documented</kbd> 表示当执行javadoc的时候，本注解会生成相关文档<br>请在学习完本知识点最后一个步骤解析注解之后，再查看 元注解，做更详尽的学习。</li>
+</ul>
+<ol start="3">
+<li>注解元素，这些注解元素就用于存放注解信息，在解析的时候获取出来</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">String <span class="title">ip</span><span class="params">()</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">port</span><span class="params">()</span> <span class="keyword">default</span> 3306</span>; </span><br><span class="line"><span class="function">String <span class="title">database</span><span class="params">()</span></span>; </span><br><span class="line"><span class="function">String <span class="title">encoding</span><span class="params">()</span></span>; </span><br><span class="line"><span class="function">String <span class="title">loginName</span><span class="params">()</span></span>; </span><br><span class="line"><span class="function">String <span class="title">password</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> anno;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.annotation.ElementType.METHOD;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.annotation.ElementType.TYPE;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Documented;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Inherited;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Target</span>(&#123;METHOD,TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> JDBCConfig &#123;</span><br><span class="line">     <span class="function">String <span class="title">ip</span><span class="params">()</span></span>;</span><br><span class="line">     <span class="function"><span class="keyword">int</span> <span class="title">port</span><span class="params">()</span> <span class="keyword">default</span> 3306</span>;</span><br><span class="line">     <span class="function">String <span class="title">database</span><span class="params">()</span></span>;</span><br><span class="line">     <span class="function">String <span class="title">encoding</span><span class="params">()</span></span>;</span><br><span class="line">     <span class="function">String <span class="title">loginName</span><span class="params">()</span></span>;</span><br><span class="line">     <span class="function">String <span class="title">password</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="注解方式DBUtil"><a href="#注解方式DBUtil" class="headerlink" title="注解方式DBUtil"></a>注解方式DBUtil</h2><blockquote>
+<p>有了自定义注解@JDBCConfig之后，我们就把非注解方式DBUtil改造成为注解方式DBUtil。</p>
+</blockquote>
+<p>如例所示，数据库相关配置信息本来是以属性的方式存放的，现在改为了以注解的方式，提供这些信息了。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> util;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> anno.JDBCConfig;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@JDBCConfig</span>(ip = <span class="string">"127.0.0.1"</span>, database = <span class="string">"test"</span>, encoding = <span class="string">"UTF-8"</span>, loginName = <span class="string">"root"</span>, password = <span class="string">"admin"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DBUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注</strong>： 目前只是以注解的方式提供这些信息，但是还没有解析，接下来进行解析</p>
+<h2 id="解析注解"><a href="#解析注解" class="headerlink" title="解析注解"></a>解析注解</h2><blockquote>
+<p>接下来就通过反射，获取这个DBUtil这个类上的注解对象</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JDBCConfig config = DBUtil<span class="class">.<span class="keyword">class</span>.<span class="title">getAnnotation</span>(<span class="title">JDBCConfig</span>.<span class="title">class</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>拿到注解对象之后，通过其方法，获取各个注解元素的值：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String ip = config.ip();</span><br><span class="line"><span class="keyword">int</span> port = config.port();</span><br><span class="line">String database = config.database();</span><br><span class="line">String encoding = config.encoding();</span><br><span class="line">String loginName = config.loginName();</span><br><span class="line">String password = config.password();</span><br></pre></td></tr></table></figure>
+
+<p>后续就一样了，根据这些配置信息得到一个数据库连接Connection实例。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> util;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> anno.JDBCConfig;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@JDBCConfig</span>(ip = <span class="string">"127.0.0.1"</span>, database = <span class="string">"test"</span>, encoding = <span class="string">"UTF-8"</span>, loginName = <span class="string">"root"</span>, password = <span class="string">"admin"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DBUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> SQLException, NoSuchMethodException, SecurityException </span>&#123;</span><br><span class="line">        JDBCConfig config = DBUtil<span class="class">.<span class="keyword">class</span>.<span class="title">getAnnotation</span>(<span class="title">JDBCConfig</span>.<span class="title">class</span>)</span>;</span><br><span class="line"> </span><br><span class="line">        String ip = config.ip();</span><br><span class="line">        <span class="keyword">int</span> port = config.port();</span><br><span class="line">        String database = config.database();</span><br><span class="line">        String encoding = config.encoding();</span><br><span class="line">        String loginName = config.loginName();</span><br><span class="line">        String password = config.password();</span><br><span class="line"> </span><br><span class="line">        String url = String.format(<span class="string">"jdbc:mysql://%s:%d/%s?characterEncoding=%s"</span>, ip, port, database, encoding);</span><br><span class="line">        <span class="keyword">return</span> DriverManager.getConnection(url, loginName, password);</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException, SecurityException, SQLException </span>&#123;</span><br><span class="line">        Connection c = getConnection();</span><br><span class="line">        System.out.println(c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注</strong>： 运行需要用到连接mysql的jar包。</p>
+<h1 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h1><h2 id="元注解概念"><a href="#元注解概念" class="headerlink" title="元注解概念"></a>元注解概念</h2><blockquote>
+<p>在讲解元注解概念之前，我们先建立元数据的概念。 元数据在英语中对应单词 metadata, metadata在wiki中的解释是：</p>
+<p>Metadata is data [information] that provides information about other data</p>
+<p>为其他数据提供信息的数据</p>
+</blockquote>
+<p>这样元注解就好理解了，元注解 meta annotation <strong>用于注解 自定义注解</strong> 的注解。元注解有这么几种：</p>
+<ul>
+<li>@Target</li>
+<li>@Retention</li>
+<li>@Inherited</li>
+<li>@Documented</li>
+<li>@Repeatable (java1.8 新增)</li>
+</ul>
+<h2 id="Target"><a href="#Target" class="headerlink" title="@Target"></a>@Target</h2><blockquote>
+<p><kbd>@Target</kbd> 表示这个注解能放在什么位置上，是只能放在类上？还是即可以放在方法上，又可以放在属性上。自定义注解@JDBCConfig 这个注解上的@Target是：@Target({METHOD,TYPE})，表示他可以用在方法和类型上（类和接口），但是不能放在属性等其他位置。 可以选择的位置列表如下：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ElementType.TYPE</td>
+<td>能修饰类、接口或枚举类型</td>
+</tr>
+<tr>
+<td>ElementType.FIELD</td>
+<td>能修饰成员变量</td>
+</tr>
+<tr>
+<td>ElementType.METHOD</td>
+<td>能修饰方法</td>
+</tr>
+<tr>
+<td>ElementType.PARAMETER</td>
+<td>能修饰参数</td>
+</tr>
+<tr>
+<td>ElementType.CONSTRUCTOR</td>
+<td>能修饰构造器</td>
+</tr>
+<tr>
+<td>ElementType.LOCAL_VARIABLE</td>
+<td>能修饰局部变量</td>
+</tr>
+<tr>
+<td>ElementType.ANNOTATION_TYPE</td>
+<td>能修饰注解</td>
+</tr>
+<tr>
+<td>ElementType.PACKAGE</td>
+<td>能修饰包</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> anno;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.annotation.ElementType.METHOD;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.annotation.ElementType.TYPE;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Documented;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Inherited;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line">  </span><br><span class="line"><span class="meta">@Target</span>(&#123;METHOD,TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> JDBCConfig &#123;</span><br><span class="line">     <span class="function">String <span class="title">ip</span><span class="params">()</span></span>;</span><br><span class="line">     <span class="function"><span class="keyword">int</span> <span class="title">port</span><span class="params">()</span> <span class="keyword">default</span> 3306</span>;</span><br><span class="line">     <span class="function">String <span class="title">database</span><span class="params">()</span></span>;</span><br><span class="line">     <span class="function">String <span class="title">encoding</span><span class="params">()</span></span>;</span><br><span class="line">     <span class="function">String <span class="title">loginName</span><span class="params">()</span></span>;</span><br><span class="line">     <span class="function">String <span class="title">password</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Retention"><a href="#Retention" class="headerlink" title="@Retention"></a>@Retention</h2><blockquote>
+<p><kbd>@Retention</kbd> 表示生命周期，自定义注解@JDBCConfig 上的值是 RetentionPolicy.RUNTIME, 表示可以在运行的时候依然可以使用。 @Retention可选的值有3个：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RetentionPolicy.SOURCE</td>
+<td>注解只在源代码中存在，编译成class之后，就没了。@Override 就是这种注解。</td>
+</tr>
+<tr>
+<td>RetentionPolicy.CLASS</td>
+<td>注解在java文件编程成.class文件后，依然存在，但是运行起来后就没了。@Retention的默认值，即当没有显式指定@Retention的时候，就会是这种类型。</td>
+</tr>
+<tr>
+<td>RetentionPolicy.RUNTIME</td>
+<td>注解在运行起来之后依然存在，程序可以通过反射获取这些信息，自定义注解@JDBCConfig 就是这样。</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> anno;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.annotation.ElementType.METHOD;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.annotation.ElementType.TYPE;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Documented;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Inherited;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Target</span>(&#123;METHOD,TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> JDBCConfig &#123;</span><br><span class="line">     <span class="function">String <span class="title">ip</span><span class="params">()</span></span>;</span><br><span class="line">     <span class="function"><span class="keyword">int</span> <span class="title">port</span><span class="params">()</span> <span class="keyword">default</span> 3306</span>;</span><br><span class="line">     <span class="function">String <span class="title">database</span><span class="params">()</span></span>;</span><br><span class="line">     <span class="function">String <span class="title">encoding</span><span class="params">()</span></span>;</span><br><span class="line">     <span class="function">String <span class="title">loginName</span><span class="params">()</span></span>;</span><br><span class="line">     <span class="function">String <span class="title">password</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Inherited"><a href="#Inherited" class="headerlink" title="@Inherited"></a>@Inherited</h2><blockquote>
+<p><kbd>@Inherited</kbd> 表示该注解具有继承性。如例，设计一个DBUtil的子类，其getConnection2方法，可以获取到父类DBUtil上的注解信息。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> util;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> anno.JDBCConfig;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DBUtilChild</span> <span class="keyword">extends</span> <span class="title">DBUtil</span> </span>&#123;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection2</span><span class="params">()</span> <span class="keyword">throws</span> SQLException, NoSuchMethodException, SecurityException </span>&#123;</span><br><span class="line">        JDBCConfig config = DBUtilChild<span class="class">.<span class="keyword">class</span>.<span class="title">getAnnotation</span>(<span class="title">JDBCConfig</span>.<span class="title">class</span>)</span>;</span><br><span class="line">        String ip = config.ip();</span><br><span class="line">        <span class="keyword">int</span> port = config.port();</span><br><span class="line">        String database = config.database();</span><br><span class="line">        String encoding = config.encoding();</span><br><span class="line">        String loginName = config.loginName();</span><br><span class="line">        String password = config.password();</span><br><span class="line"> </span><br><span class="line">        String url = String.format(<span class="string">"jdbc:mysql://%s:%d/%s?characterEncoding=%s"</span>, ip, port, database, encoding);</span><br><span class="line">        <span class="keyword">return</span> DriverManager.getConnection(url, loginName, password);</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException, SecurityException, SQLException </span>&#123;</span><br><span class="line">        Connection c = getConnection2();</span><br><span class="line">        System.out.println(c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Documented"><a href="#Documented" class="headerlink" title="@Documented"></a>@Documented</h2><blockquote>
+<p><kbd>@Documented</kbd> 如图所示， 在用javadoc命令生成API文档后，DBUtil的文档里会出现该注解说明。</p>
+</blockquote>
+<p><strong>注</strong>： 使用eclipse把项目中的.java文件导成API文档步骤：</p>
+<ol>
+<li>选中项目</li>
+<li>点开菜单File</li>
+<li>点击Export</li>
+<li>点开java-&gt;javadoc-&gt;点next</li>
+<li>点finish</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20200712174520194.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+<h2 id="Repeatable-java1-8-新增"><a href="#Repeatable-java1-8-新增" class="headerlink" title="@Repeatable (java1.8 新增)"></a>@Repeatable (java1.8 新增)</h2><blockquote>
+<p>当没有<kbd>@Repeatable</kbd>修饰的时候，注解在同一个位置，只能出现一次，如例所示：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@JDBCConfig</span>(ip = <span class="string">"127.0.0.1"</span>, database = <span class="string">"test"</span>, encoding = <span class="string">"UTF-8"</span>, loginName = <span class="string">"root"</span>, password = <span class="string">"admin"</span>)</span><br><span class="line"><span class="meta">@JDBCConfig</span>(ip = <span class="string">"127.0.0.1"</span>, database = <span class="string">"test"</span>, encoding = <span class="string">"UTF-8"</span>, loginName = <span class="string">"root"</span>, password = <span class="string">"admin"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>重复做两次就会报错了。</p>
+<p>使用@Repeatable之后，再配合一些其他动作，就可以在同一个地方使用多次了。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> util;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> anno.JDBCConfig;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@JDBCConfig</span>(ip = <span class="string">"127.0.0.1"</span>, database = <span class="string">"test"</span>, encoding = <span class="string">"UTF-8"</span>, loginName = <span class="string">"root"</span>, password = <span class="string">"admin"</span>)</span><br><span class="line"><span class="meta">@JDBCConfig</span>(ip = <span class="string">"127.0.0.1"</span>, database = <span class="string">"test"</span>, encoding = <span class="string">"UTF-8"</span>, loginName = <span class="string">"root"</span>, password = <span class="string">"admin"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DBUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> SQLException, NoSuchMethodException, SecurityException </span>&#123;</span><br><span class="line">        JDBCConfig config = DBUtil<span class="class">.<span class="keyword">class</span>.<span class="title">getAnnotation</span>(<span class="title">JDBCConfig</span>.<span class="title">class</span>)</span>;</span><br><span class="line">        System.out.println(config);</span><br><span class="line"> </span><br><span class="line">        String ip = config.ip();</span><br><span class="line">        <span class="keyword">int</span> port = config.port();</span><br><span class="line">        String database = config.database();</span><br><span class="line">        String encoding = config.encoding();</span><br><span class="line">        String loginName = config.loginName();</span><br><span class="line">        String password = config.password();</span><br><span class="line"> </span><br><span class="line">        String url = String.format(<span class="string">"jdbc:mysql://%s:%d/%s?characterEncoding=%s"</span>, ip, port, database, encoding);</span><br><span class="line">        <span class="keyword">return</span> DriverManager.getConnection(url, loginName, password);</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException, SecurityException, SQLException </span>&#123;</span><br><span class="line">        Connection c = getConnection();</span><br><span class="line">        System.out.println(c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Repeatable-运用举例"><a href="#Repeatable-运用举例" class="headerlink" title="@Repeatable 运用举例"></a>@Repeatable 运用举例</h2><blockquote>
+<p>比如在查找文件后缀名是.java的文件时，我们把部分代码修改为注解，并且使用@Repeatable 这个元注解来表示，文件后缀名的范围可以是java, html, css, js 等等。</p>
+</blockquote>
+<p>为了紧凑起见，把注解作为内部类的形式放在一个文件里。</p>
+<ol>
+<li>注解FileTypes，其value()返回一个FileType数组</li>
+<li>注解FileType，其@Repeatable的值采用FileTypes</li>
+<li>运用注解：在work方法上重复使用多次@FileType注解</li>
+<li>解析注解： 在work方法内，通过反射获取到本方法上的FileType类型的注解数组，然后遍历本数组</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> annotation;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.annotation.ElementType.METHOD;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Repeatable;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindFiles</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Target</span>( METHOD)</span><br><span class="line">    <span class="meta">@Retention</span>( RetentionPolicy.RUNTIME )</span><br><span class="line">    <span class="keyword">public</span> <span class="meta">@interface</span> FileTypes &#123;</span><br><span class="line">        FileType[] value();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Target</span>(  METHOD )</span><br><span class="line">    <span class="meta">@Retention</span>( RetentionPolicy.RUNTIME )</span><br><span class="line">    <span class="meta">@Repeatable</span>( FileTypes<span class="class">.<span class="keyword">class</span> )</span></span><br><span class="line"><span class="class">    <span class="title">public</span> @<span class="title">interface</span> <span class="title">FileType</span> </span>&#123;</span><br><span class="line">        <span class="function">String <span class="title">value</span><span class="params">()</span></span>;</span><br><span class="line">    &#125;;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@FileType</span>( <span class="string">".java"</span> )</span><br><span class="line">    <span class="meta">@FileType</span>( <span class="string">".html"</span> )</span><br><span class="line">    <span class="meta">@FileType</span>( <span class="string">".css"</span> )</span><br><span class="line">    <span class="meta">@FileType</span>( <span class="string">".js"</span> )</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span>&#123;</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            FileType[] fileTypes= <span class="keyword">this</span>.getClass().getMethod(<span class="string">"work"</span>).getAnnotationsByType(FileType<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">            System.out.println(<span class="string">"将从如下后缀名的文件中查找文件内容"</span>);</span><br><span class="line">            <span class="keyword">for</span> (FileType fileType : fileTypes) &#123;</span><br><span class="line">                System.out.println(fileType.value());</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">"查找过程略。。。"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchMethodException | SecurityException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> FindFiles().work();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="仿Hibernate注解"><a href="#仿Hibernate注解" class="headerlink" title="仿Hibernate注解"></a>仿Hibernate注解</h1><h2 id="hibernate两种配置方式"><a href="#hibernate两种配置方式" class="headerlink" title="hibernate两种配置方式"></a>hibernate两种配置方式</h2><blockquote>
+<p>hibernate有两种配置方式，分别是<code>*.hbm.xml 配置方式</code> 和<code>注解方式</code>。 虽然方式不一样，但是都是用于解决如下问题：</p>
+</blockquote>
+<ol>
+<li>当前类是否实体类</li>
+<li>对应的表名称</li>
+<li>主键对应哪个属性， 自增长策略是什么，对应字段名称是什么</li>
+<li>非主键属性对应字段名称是什么</li>
+</ol>
+<p>接下来，我会做一套仿hibernate的注解，并且在一个实体类Hero上运用这些注解，并通过反射解析这些注解信息，来解决上述的问题</p>
+<h2 id="自定义hibernate注解"><a href="#自定义hibernate注解" class="headerlink" title="自定义hibernate注解"></a>自定义hibernate注解</h2><p>参考hibernate的 注解配置方式 ，自定义5个注解，分别对应hibernate中用到的注解：</p>
+<ol>
+<li>hibernate_annotation.MyEntity 对应 javax.persistence.Entity</li>
+<li>hibernate_annotation.MyTable 对应 javax.persistence.Table</li>
+<li>hibernate_annotation.MyId 对应 javax.persistence.Id</li>
+<li>hibernate_annotation.MyGeneratedValue 对应 javax.persistence.GeneratedValue</li>
+<li>hibernate_annotation.MyColumn 对应 javax.persistence.Column</li>
+</ol>
+<ul>
+<li>MyEntity.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> hibernate_annotation;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Target</span>(ElementType.TYPE)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyEntity &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>MyTable.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> hibernate_annotation;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Target</span>(ElementType.TYPE)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyTable &#123;</span><br><span class="line">    <span class="function">String <span class="title">name</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>MyId.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> hibernate_annotation;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyId &#123;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>MyGeneratedValue.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> hibernate_annotation;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyGeneratedValue &#123;</span><br><span class="line">    <span class="function">String <span class="title">strategy</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>MyColumn.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> hibernate_annotation;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyColumn &#123;</span><br><span class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="运用在Hero对象上"><a href="#运用在Hero对象上" class="headerlink" title="运用在Hero对象上"></a>运用在Hero对象上</h2><blockquote>
+<p>像以注解方式配置Product类那样，在Hero类上运用这些自定义注解：</p>
+<p>当注解的方法是value的时候，给这个注解赋值时，本来应该是：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@MyColumn</span>(value=<span class="string">"name_"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>现在可以简略一点，写为</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@MyColumn</span>(<span class="string">"name_"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>只有当名称是value的时候可以这样，其他名称如name,stratgy等不行</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> pojo;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> hibernate_annotation.MyColumn;</span><br><span class="line"><span class="keyword">import</span> hibernate_annotation.MyEntity;</span><br><span class="line"><span class="keyword">import</span> hibernate_annotation.MyGeneratedValue;</span><br><span class="line"><span class="keyword">import</span> hibernate_annotation.MyId;</span><br><span class="line"><span class="keyword">import</span> hibernate_annotation.MyTable;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@MyEntity</span></span><br><span class="line"><span class="meta">@MyTable</span>(name=<span class="string">"hero_"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hero</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> damage;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> armor;</span><br><span class="line">     </span><br><span class="line">    <span class="meta">@MyId</span></span><br><span class="line">    <span class="meta">@MyGeneratedValue</span>(strategy = <span class="string">"identity"</span>)</span><br><span class="line">    <span class="meta">@MyColumn</span>(<span class="string">"id_"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@MyColumn</span>(<span class="string">"name_"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@MyColumn</span>(<span class="string">"damage_"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getDamage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> damage;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDamage</span><span class="params">(<span class="keyword">int</span> damage)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.damage = damage;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@MyColumn</span>(<span class="string">"armor_"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getArmor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> armor;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setArmor</span><span class="params">(<span class="keyword">int</span> armor)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.armor = armor;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解析注解-1"><a href="#解析注解-1" class="headerlink" title="解析注解"></a>解析注解</h2><blockquote>
+<p>创建一个解析类ParseHibernateAnnotation ，获取Hero类上配置的注解信息，其运行结果如图所示。思路如下：</p>
+</blockquote>
+<ol>
+<li>首先获取Hero.class类对象</li>
+<li>判断本类是否进行了MyEntity 注解</li>
+<li>获取注解 MyTable</li>
+<li>遍历所有的方法，如果某个方法有MyId注解，那么就记录为主键方法primaryKeyMethod</li>
+<li>把主键方法的自增长策略注解MyGeneratedValue和对应的字段注解MyColumn 取出来，并打印</li>
+<li>遍历所有非主键方法，并且有MyColumn注解的方法，打印属性名称和字段名称的对应关系。</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/2020071218114260.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> hibernate_annotation.MyColumn;</span><br><span class="line"><span class="keyword">import</span> hibernate_annotation.MyEntity;</span><br><span class="line"><span class="keyword">import</span> hibernate_annotation.MyGeneratedValue;</span><br><span class="line"><span class="keyword">import</span> hibernate_annotation.MyId;</span><br><span class="line"><span class="keyword">import</span> hibernate_annotation.MyTable;</span><br><span class="line"><span class="keyword">import</span> pojo.Hero;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParseHibernateAnnotation</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">        Class&lt;Hero&gt; clazz = Hero<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">        MyEntity myEntity = (MyEntity) clazz.getAnnotation(MyEntity<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == myEntity) &#123;</span><br><span class="line">            System.out.println(<span class="string">"Hero类不是实体类"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"Hero类是实体类"</span>);</span><br><span class="line">            MyTable myTable= (MyTable) clazz.getAnnotation(MyTable<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">            String tableName = myTable.name();</span><br><span class="line">            System.out.println(<span class="string">"其对应的表名是:"</span> + tableName);</span><br><span class="line">            Method[] methods =clazz.getMethods();</span><br><span class="line">            Method primaryKeyMethod = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">for</span> (Method m: methods) &#123;</span><br><span class="line">                MyId myId = m.getAnnotation(MyId<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">                <span class="keyword">if</span>(<span class="keyword">null</span>!=myId)&#123;</span><br><span class="line">                    primaryKeyMethod = m;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">             </span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">null</span>!=primaryKeyMethod)&#123;</span><br><span class="line">                System.out.println(<span class="string">"找到主键："</span> + method2attribute( primaryKeyMethod.getName() ));</span><br><span class="line">                MyGeneratedValue myGeneratedValue =</span><br><span class="line">                primaryKeyMethod.getAnnotation(MyGeneratedValue<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">                System.out.println(<span class="string">"其自增长策略是："</span> +myGeneratedValue.strategy());</span><br><span class="line">                MyColumn myColumn = primaryKeyMethod.getAnnotation(MyColumn<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">                System.out.println(<span class="string">"对应数据库中的字段是："</span> +myColumn.value());</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">"其他非主键属性分别对应的数据库字段如下："</span>);</span><br><span class="line">            <span class="keyword">for</span> (Method m: methods) &#123;</span><br><span class="line">                <span class="keyword">if</span>(m==primaryKeyMethod)&#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                MyColumn myColumn = m.getAnnotation(MyColumn<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">                <span class="comment">//那些setter方法上是没有MyColumn注解的</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="keyword">null</span>==myColumn)</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                System.out.format(<span class="string">"属性： %s\t对应的数据库字段是:%s%n"</span>,method2attribute(m.getName()),myColumn.value());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">method2attribute</span><span class="params">(String methodName)</span> </span>&#123;</span><br><span class="line">        String result = methodName; ;</span><br><span class="line">        result = result.replaceFirst(<span class="string">"get"</span>, <span class="string">""</span>);</span><br><span class="line">        result = result.replaceFirst(<span class="string">"is"</span>, <span class="string">""</span>);</span><br><span class="line">        <span class="keyword">if</span>(result.length()&lt;=<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> result.toLowerCase();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> result.substring(<span class="number">0</span>,<span class="number">1</span>).toLowerCase() + result.substring(<span class="number">1</span>,result.length());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="注解分类"><a href="#注解分类" class="headerlink" title="注解分类"></a>注解分类</h1><h2 id="按照作用域分"><a href="#按照作用域分" class="headerlink" title="按照作用域分"></a>按照作用域分</h2><p>根据注解的作用域@Retention，注解分为：</p>
+<ol>
+<li>RetentionPolicy.SOURCE： Java源文件上的注解</li>
+<li>RetentionPolicy.CLASS： Class类文件上的注解</li>
+<li>RetentionPolicy.RUNTIME： 运行时的注解</li>
+</ol>
+<h2 id="按照来源分"><a href="#按照来源分" class="headerlink" title="按照来源分"></a>按照来源分</h2><p>按照注解的来源，也是分为3类：</p>
+<ol>
+<li>内置注解：如@Override ，@Deprecated 等等</li>
+<li>第三方注解：如Hibernate, Struts等等</li>
+<li>自定义注解：如仿hibernate的自定义注解</li>
+</ol>
+]]></content>
+      <categories>
+        <category>学习记录</category>
+        <category>Java</category>
+        <category>Java高级</category>
+      </categories>
+      <tags>
+        <tag>Java注解</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java面向对象基础</title>
     <url>/posts/48957eb.html</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
-<p>本文介绍了Java面向对象的一些基本知识，对面向对象的三大特征（继承、封装、多态）进行了讲解，另外还包括抽象类、接口、内部类、String基础等知识。</p>
+<p>本文介绍了Java<code>面向对象</code>的一些基本知识，对面向对象的三大特征（<code>继承</code>、<code>封装</code>、<code>多态</code>）进行了讲解，另外还包括<code>抽象类</code>、<code>接口</code>、<code>内部类</code>、<code>String</code>基础等知识。</p>
 </blockquote>
 <a id="more"></a>
 
@@ -327,7 +687,7 @@
 <p><img src="https://img-blog.csdnimg.cn/20200708210447530.png" alt=""></p>
 <h3 id="和equals方法"><a href="#和equals方法" class="headerlink" title="==和equals方法"></a>==和equals方法</h3><blockquote>
 <p>“==”代表比较双方是否相同。如果是基本类型则表示值相等，如果是引用类型则表示地址相等即是同一个对象。</p>
-<p>Object类中定义有：<kbd>public boolean equals(Object obj)</kbd>方法，提供定义“对象内容相等”的逻辑。比如，我们在公安系统中认为id相同的人就是同一个人、学籍系统中认为学号相同的人就是同一个人。</p>
+<p>Object类中定义有：public boolean <kbd>equals</kbd>(Object obj)方法，提供定义“对象内容相等”的逻辑。比如，我们在公安系统中认为id相同的人就是同一个人、学籍系统中认为学号相同的人就是同一个人。</p>
 <p>Object 的 equals 方法默认就是比较两个对象的<code>hashcode</code>，是同一个对象的引用时返回 true 否则返回 false。但是，我们可以根据我们自己的要求重写equals方法。</p>
 </blockquote>
 <p>示例：equals方法测试和自定义类重写equals方法</p>
@@ -636,7 +996,7 @@
 <li>使用内部类间接实现多继承：每个内部类都能独立地继承一个类或者实现某些接口，所以无论外部类是否已经继承了某个类或者实现了某些接口，对于内部类没有任何影响。</li>
 </ol>
 <h2 id="内部类的分类"><a href="#内部类的分类" class="headerlink" title="内部类的分类"></a>内部类的分类</h2><blockquote>
-<p>在Java中内部类主要分为<kbd>成员内部类</kbd>（<kbd>非静态内部类</kbd>、<kbd>静态内部类）</kbd>、<kbd>匿名内部类</kbd>、<kbd>局部内部类</kbd>。</p>
+<p>在Java中内部类主要分为<code>成员内部类</code>（<code>非静态内部类</code>、<code>静态内部类</code>）、<code>匿名内部类</code>、<code>局部内部类</code>。</p>
 </blockquote>
 <h3 id="成员内部类"><a href="#成员内部类" class="headerlink" title="成员内部类"></a>成员内部类</h3><blockquote>
 <p>可以使用private、default、protected、public任意进行修饰。 </p>
@@ -1541,7 +1901,7 @@
     <title>Markdown常用语法介绍</title>
     <url>/posts/b21c3463.html</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
-<p>如果你想学习如何使用Markdown编辑器, 可以仔细阅读这篇文章，了解一下Markdown的基本语法知识。</p>
+<p>如果你想学习如何使用<code>Markdown</code>编辑器, 可以仔细阅读这篇文章，了解一下<code>Markdown</code>的基本语法知识。</p>
 </blockquote>
 <a id="more"></a>
 
