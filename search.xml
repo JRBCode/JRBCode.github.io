@@ -3,26 +3,15 @@
   <entry>
     <title>Java反射机制</title>
     <url>/posts/29f40393.html</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><style>
-span.red{
-    color:red;
-}
-p{
-    font-family:楷体;
-    font-size:110%;
-}
-</style>
-
-<blockquote>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
+<p>在运行状态中，对于任意一个类，都能够获取到这个类的<strong>所有属性和方法</strong>，对于<code>任意</code>一个对象，都能够调用它的<code>任意</code>一个方法和属性(包括私有的方法和属性)，这种动态获取的信息以及动态调用对象的方法的功能就称为java语言的<kbd>反射机制</kbd>。通俗点讲，通过反射，该类对我们来说是完全透明的，想要获取任何东西都可以。</p>
 </blockquote>
 <a id="more"></a>
 
-<h1 id="反射概念"><a href="#反射概念" class="headerlink" title="反射概念"></a>反射概念</h1><blockquote>
-<p>在运行状态中，对于任意一个类，都能够获取到这个类的所有属性和方法，对于任意一个对象，都能够调用它的任意一个方法和属性(包括私有的方法和属性)，这种动态获取的信息以及动态调用对象的方法的功能就称为java语言的<kbd>反射机制</kbd>。通俗点讲，通过反射，该类对我们来说是完全透明的，想要获取任何东西都可以。</p>
+<blockquote>
 <p>想要使用反射机制，就必须要先获取到该类的<code>字节码文件对象</code>(.class)，通过字节码文件对象，就能够通过该类中的方法获取到我们想要的所有信息(方法，属性，类名，父类名，实现的所有接口等等)，每一个类对应着一个字节码文件也就对应着一个Class类型的对象，也就是字节码文件对象。</p>
 </blockquote>
-<p><strong>获取字节码文件对象的三种方式</strong>：</p>
-<ol>
+<h1 id="反射机制能获取的信息"><a href="#反射机制能获取的信息" class="headerlink" title="反射机制能获取的信息"></a>反射机制能获取的信息</h1><h2 id="获取字节码文件对象"><a href="#获取字节码文件对象" class="headerlink" title="获取字节码文件对象"></a>获取字节码文件对象</h2><ol>
 <li>第一种方式–&gt;Class.forName(“类名字符串”)。</li>
 </ol>
 <blockquote>
@@ -49,7 +38,17 @@ p{
 <blockquote>
 <p>有了字节码文件对象才能获得类中所有的信息，我们在使用反射获取信息时，也要考虑使用上面哪种方式获取字节码对象合理，视不同情况而定。下面介绍Class类的功能。</p>
 </blockquote>
-<h1 id="反射机制能获取的信息"><a href="#反射机制能获取的信息" class="headerlink" title="反射机制能获取的信息"></a>反射机制能获取的信息</h1><h2 id="通过字节码对象创建实例对象"><a href="#通过字节码对象创建实例对象" class="headerlink" title="通过字节码对象创建实例对象"></a>通过字节码对象创建实例对象</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//注:类名字符串是"包名+类名" 返回Class的对象。(这种是最常用的方法)</span></span><br><span class="line">Class c1=Class.forName(<span class="string">"csdn.Student"</span>);</span><br><span class="line"><span class="comment">// 创建student实例，通过student的无参构造方法</span></span><br><span class="line">Student stu = (Student)c1.newInstance();</span><br></pre></td></tr></table></figure>
+<h2 id="获取简单-完整类名"><a href="#获取简单-完整类名" class="headerlink" title="获取简单/完整类名"></a>获取简单/完整类名</h2><ul>
+<li><strong>获取简单类名</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo02</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//获得字符串的Class对象</span></span><br><span class="line">        Class c = Class.forName(<span class="string">"java.lang.String"</span>);</span><br><span class="line">        <span class="comment">//获得简单类名</span></span><br><span class="line">        String name = c.getSimpleName();</span><br><span class="line">        <span class="comment">//打印输入: name = String</span></span><br><span class="line">        System.out.println(<span class="string">"name = "</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>获取完整类名</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo02</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//获得字符串的Class对象</span></span><br><span class="line">        Class c = Class.forName(<span class="string">"java.lang.String"</span>);</span><br><span class="line">        <span class="comment">//获得完整类名(包含包名和类名)</span></span><br><span class="line">        String name = c.getName();</span><br><span class="line">        <span class="comment">//打印输入: name = java. lang.String</span></span><br><span class="line">        System.out.println(<span class="string">"name = "</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="通过字节码对象创建实例对象"><a href="#通过字节码对象创建实例对象" class="headerlink" title="通过字节码对象创建实例对象"></a>通过字节码对象创建实例对象</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//注:类名字符串是"包名+类名" 返回Class的对象。(这种是最常用的方法)</span></span><br><span class="line">Class c1=Class.forName(<span class="string">"csdn.Student"</span>);</span><br><span class="line"><span class="comment">// 创建student实例，通过student的无参构造方法</span></span><br><span class="line">Student stu = (Student)c1.newInstance();</span><br></pre></td></tr></table></figure>
 
 <h2 id="获取构造器方法"><a href="#获取构造器方法" class="headerlink" title="获取构造器方法"></a>获取构造器方法</h2><blockquote>
 <p>constructor 如果没有无参构造，只有有参构造如何创建实例呢？看下面</p>
@@ -83,6 +82,9 @@ p{
 <td>返回此Class对象所表示的类的指定构造方法。</td>
 </tr>
 </tbody></table>
+<ul>
+<li><strong>获取指定构造方法</strong></li>
+</ul>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> <span class="comment">//获取字节码文件</span></span><br><span class="line"><span class="number">2</span> Class clazz1=Class.forName(<span class="string">"csdn.Student"</span>);</span><br><span class="line"><span class="number">3</span> <span class="comment">//先获取有参构造器，parameterTypes;表示参数列表，有多少写多少，也可以不写，不写就是调用无参构造器</span></span><br><span class="line"><span class="number">4</span> Constructor constructor = clazz1.getConstructor(<span class="keyword">int</span><span class="class">.<span class="keyword">class</span>,<span class="title">String</span>.<span class="title">class</span>)</span>;</span><br><span class="line"><span class="number">5</span> <span class="comment">//通过构造器来实例化对象，将实际的参数传进去</span></span><br><span class="line"><span class="number">6</span> Student student = (Student)constructor.newInstance(<span class="string">"小明"</span>，<span class="number">12</span>);</span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -164,6 +166,9 @@ p{
 <td>返回此Class对象所表示的实体的指定公共成员方法，name指定方法名称，parameterTypes指定方 法参数类型。</td>
 </tr>
 </tbody></table>
+<ul>
+<li><strong>获取指定方法</strong></li>
+</ul>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 通过反射获得字节码文件对象</span></span><br><span class="line">Class clazz1 = Class.forName(<span class="string">"Reflect.Student"</span>);</span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line">Student student = (Student) clazz1.newInstance();</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* clazz1.clazz1.getMethod(name, parameterTypes)</span></span><br><span class="line"><span class="comment">*   name 方法的名字</span></span><br><span class="line"><span class="comment">*   parameterTypes：方法的参数类型为Class类型，没有则不填写，比如参数为String，则填写为String.Class</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//eat为不带参数的public方法</span></span><br><span class="line">Method method = clazz1.getMethod(<span class="string">"eat"</span>);</span><br><span class="line">Method method1 = clazz1.getMethod(<span class="string">"sing"</span>, String<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* method.invoke(obj, args)</span></span><br><span class="line"><span class="comment">*   obj:方法的对象</span></span><br><span class="line"><span class="comment">*   args:是的参数值，没有则不填</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//调用方法</span></span><br><span class="line">method.invoke(student);</span><br><span class="line">method1.invoke(student, <span class="string">"呵呵"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取私有的方法，和获取属性一样，say为私有的方法</span></span><br><span class="line">Method method2 = clazz1.getDeclaredMethod(<span class="string">"say"</span>);</span><br><span class="line">method2.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">method2.invoke(student);</span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -198,7 +203,7 @@ p{
 <p><img src="https://img-blog.csdnimg.cn/20200712232002314.png" alt=""></p>
 <p><img src="https://img-blog.csdnimg.cn/20200712232024172.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
 <p><img src="https://img-blog.csdnimg.cn/20200712232131649.png" alt=""></p>
-<p><span class="red"><strong>注意</strong></span>：newProxyInstance的三个参数，第一个，类加载器，第二个被代理对象的接口，第三个代理对象。</p>
+<p><strong>注意</strong>：newProxyInstance的三个参数，第一个类加载器，第二个被代理对象的接口，第三个代理对象。</p>
 <h2 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h2><blockquote>
 <p>还有很多方法，比如获得类加载器，等等。具体还需要别的，就通过查看API文档来解决。</p>
 </blockquote>
@@ -267,17 +272,7 @@ p{
   <entry>
     <title>Java注解简介</title>
     <url>/posts/7aaf7bcb.html</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><style>
-span.red{
-    color:red;
-}
-p{
-    font-family:楷体;
-    font-size:110%;
-}
-</style>
-
-<blockquote>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
 <p>本文首先简单介绍Java的<code>基本注解</code>，然后借助<code>自定义注解</code>的方式，帮助大家理解 <code>Hibernate</code>，<code>Spring</code>, <code>Struts</code>等等<code>第三方注解</code>是如何工作的。</p>
 </blockquote>
 <a id="more"></a>
@@ -636,17 +631,7 @@ p{
   <entry>
     <title>Java面向对象基础</title>
     <url>/posts/48957eb.html</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><style>
-span.red{
-    color:red;
-}
-p{
-    font-family:楷体;
-    font-size:110%;
-}
-</style>
-
-<blockquote>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
 <p>本文介绍了Java<code>面向对象</code>的一些基本知识，对面向对象的三大特征（<code>继承</code>、<code>封装</code>、<code>多态</code>）进行了讲解，另外还包括<code>抽象类</code>、<code>接口</code>、<code>内部类</code>、<code>String</code>基础等知识。</p>
 </blockquote>
 <a id="more"></a>
@@ -817,7 +802,7 @@ p{
 <h1 id="静态初始化块"><a href="#静态初始化块" class="headerlink" title="静态初始化块"></a>静态初始化块</h1><blockquote>
 <p><code>构造方法</code>用于对象的初始化！<code>静态初始化块</code>，用于类的初始化操作！在静态初始化块中不能直接访问非static成员。</p>
 </blockquote>
-<p><span class="red"><strong>注意事项：</strong></span></p>
+<p><strong>注意事项：</strong></p>
 <p>静态初始化块执行顺序：</p>
 <ol>
 <li>上溯到Object类，先执行Object的静态初始化块，再向下执行子类的静态初始化块，直到我们的类的静态初始化块为止。</li>
@@ -861,7 +846,7 @@ p{
 <p>示例：package的命名举例</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">com.sun.test;</span><br><span class="line">com.oracle.test;</span><br><span class="line">cn.sxt.gao.test;</span><br><span class="line">cn.sxt.gao.view;</span><br><span class="line">cn.sxt.gao.view.model;</span><br></pre></td></tr></table></figure>
 
-<p><span class="red"><strong>注意事项：</strong></span></p>
+<p><strong>注意事项：</strong></p>
 <ol>
 <li>写项目时都要加包，不要使用默认包。</li>
 <li>com.gao和com.gao.car，这两个包没有包含关系，是两个完全独立的包。只是逻辑上看起来后者是前者的一部分。</li>
@@ -900,7 +885,7 @@ p{
 <h2 id="导入类import"><a href="#导入类import" class="headerlink" title="导入类import"></a>导入类import</h2><blockquote>
 <p>如果我们要使用其他包的类，需要使用<code>import</code>导入，从而可以在本类中直接通过类名来调用，否则就需要书写类的完整包名和类名。import后，便于编写代码，提高可维护性。</p>
 </blockquote>
-<p><span class="red"><strong>注意要点：</strong></span></p>
+<p><strong>注意要点：</strong></p>
 <ol>
 <li>Java会默认导入<code>java.lang</code>包下所有的类，因此这些类我们可以直接使用。</li>
 <li>如果导入两个同名的类，只能用包名+类名来显示调用相关类：　</li>
@@ -1260,7 +1245,7 @@ p{
 <p>一般情况，我们把类定义成独立的单元。有些情况下，我们把一个类放在另一个类的内部定义，称为<kbd>内部类(innerclasses)</kbd>。</p>
 <p>内部类可以使用public、default、protected 、private以及static修饰。而外部顶级类(我们以前接触的类)只能使用public和default修饰。</p>
 </blockquote>
-<p><span class="red"><strong>注意：</strong></span></p>
+<p><strong>注意：</strong></p>
 <blockquote>
 <p>内部类只是一个编译时概念，一旦我们编译成功，就会成为完全不同的两个类。对于一个名为Outer的外部类和其内部定义的名为Inner的内部类。编译完成后会出现Outer.class和Outer$Inner.class两个类的字节码文件。所以内部类是相对独立的一种存在，其成员变量/方法名可以和外部类的相同。</p>
 </blockquote>
@@ -1350,7 +1335,7 @@ p{
 <p>示例：匿名内部类的使用</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.addWindowListener(<span class="keyword">new</span> WindowAdapter()&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">windowClosing</span><span class="params">(WindowEvent e)</span> </span>&#123;</span><br><span class="line">            System.exit(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br><span class="line"><span class="keyword">this</span>.addKeyListener(<span class="keyword">new</span> KeyAdapter()&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">keyPressed</span><span class="params">(KeyEvent e)</span> </span>&#123;</span><br><span class="line">            myTank.keyPressed(e);</span><br><span class="line">        &#125;      </span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">keyReleased</span><span class="params">(KeyEvent e)</span> </span>&#123;</span><br><span class="line">            myTank.keyReleased(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
-<p><span class="red"><strong>注意：</strong></span></p>
+<p><strong>注意：</strong></p>
 <ol>
 <li>匿名内部类没有访问修饰符。</li>
 <li>匿名内部类没有构造方法。因为它连名字都没有那又何来构造方法呢。</li>
@@ -1498,17 +1483,7 @@ p{
   <entry>
     <title>Java数据类型、运算符及控制语句</title>
     <url>/posts/df6ba488.html</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><style>
-span.red{
-    color:red;
-}
-p{
-    font-family:楷体;
-    font-size:110%;
-}
-</style>
-
-<blockquote>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
 <p>本文介绍了Java的<code>注释</code>、<code>标识符</code>、<code>关键字/保留字</code>、<code>变量</code>、<code>常量</code>、<code>基本数据类型</code>、<code>运算符</code>、<code>类型转换</code>、<code>简单的键盘输入和输出</code>、<code>控制语句</code>、<code>方法重载</code>。</p>
 </blockquote>
 <a id="more"></a>
@@ -2191,17 +2166,7 @@ p{
   <entry>
     <title>Markdown常用语法介绍</title>
     <url>/posts/b21c3463.html</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><style>
-span.red{
-    color:red;
-}
-p{
-    font-family:楷体;
-    font-size:110%;
-}
-</style>
-
-<blockquote>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
 <p>如果你想学习如何使用<code>Markdown</code>编辑器, 可以仔细阅读这篇文章，了解一下<code>Markdown</code>的基本语法知识。</p>
 </blockquote>
 <a id="more"></a>
@@ -2435,17 +2400,7 @@ p{
   <entry>
     <title>简析十种排序算法</title>
     <url>/posts/b4ecf97e.html</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><style>
-span.red{
-    color:red;
-}
-p{
-    font-family:楷体;
-    font-size:110%;
-}
-</style>
-
-<blockquote>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
 <p>排序算法可以分以下几种：<code>冒泡排序</code>、<code>选择排序</code>、<code>插入排序</code>、<code>希尔排序</code>、<code>归并排序</code>、<code>快速排序</code>、<code>堆排序</code>、<code>计数排序</code>、<code>桶排序</code>、<code>基数排序</code>。</p>
 </blockquote>
 <a id="more"></a>
@@ -2822,17 +2777,7 @@ p{
   <entry>
     <title>Boyer-Moore 投票算法</title>
     <url>/posts/1724aac2.html</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><style>
-span.red{
-    color:red;
-}
-p{
-    font-family:楷体;
-    font-size:110%;
-}
-</style>
-
-<blockquote>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
 <p><kbd>摩尔投票算法</kbd>也可以叫做<kbd>多数投票算法</kbd>，是在 leetcode 169（Majority Element）题目中涉及到的算法。</p>
 </blockquote>
 <a id="more"></a>
@@ -2906,17 +2851,7 @@ p{
   <entry>
     <title>IntelliJ IDEA 快捷键说明大全</title>
     <url>/posts/5e63e6f3.html</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><style>
-span.red{
-    color:red;
-}
-p{
-    font-family:楷体;
-    font-size:110%;
-}
-</style>
-
-<p><img src="https://img-blog.csdnimg.cn/2020063010551598.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://img-blog.csdnimg.cn/2020063010551598.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
 <a id="more"></a>
 
 <hr>
@@ -3597,17 +3532,7 @@ p{
   <entry>
     <title>Hexo+NexT博客搭建</title>
     <url>/posts/63c4b34f.html</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><style>
-span.red{
-    color:red;
-}
-p{
-    font-family:楷体;
-    font-size:110%;
-}
-</style>
-
-<p><img src="https://img-blog.csdnimg.cn/20200712223249386.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://img-blog.csdnimg.cn/20200712223249386.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
 <a id="more"></a>
 
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
@@ -4494,17 +4419,7 @@ p{
   <entry>
     <title>Python学习(小甲鱼)</title>
     <url>/posts/d8fb208b.html</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><style>
-span.red{
-    color:red;
-}
-p{
-    font-family:楷体;
-    font-size:110%;
-}
-</style>
-
-<p><img src="https://img-blog.csdnimg.cn/20200712183020633.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://img-blog.csdnimg.cn/20200712183020633.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
 <a id="more"></a>
 
 <ul>
@@ -4522,17 +4437,7 @@ p{
   <entry>
     <title>Java中的匿名内部类及Lambda表达式</title>
     <url>/posts/3bccc17d.html</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><style>
-span.red{
-    color:red;
-}
-p{
-    font-family:楷体;
-    font-size:110%;
-}
-</style>
-
-<p><img src="https://img-blog.csdnimg.cn/20200213121801641.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://img-blog.csdnimg.cn/20200213121801641.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
 <a id="more"></a>
 
 <h1 id="一、匿名内部类"><a href="#一、匿名内部类" class="headerlink" title="一、匿名内部类"></a>一、匿名内部类</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>匿名内部类没有名字，其定义格式如下：</p>
@@ -4617,17 +4522,7 @@ p{
   <entry>
     <title>Git常用命令</title>
     <url>/posts/caff8000.html</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><style>
-span.red{
-    color:red;
-}
-p{
-    font-family:楷体;
-    font-size:110%;
-}
-</style>
-
-<p><img src="https://img-blog.csdnimg.cn/2020021223384954.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://img-blog.csdnimg.cn/2020021223384954.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
 <a id="more"></a>
 
 <h2 id="Git-工作区-暂存区-版本库"><a href="#Git-工作区-暂存区-版本库" class="headerlink" title="Git 工作区/暂存区/版本库"></a>Git 工作区/暂存区/版本库</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">"JRBW0910"</span></span><br><span class="line"></span><br><span class="line">git config --global user.email <span class="string">"244085774@qq.com"</span></span><br><span class="line"></span><br><span class="line">git init   把指定目录变成 Git 可以管理的仓库</span><br><span class="line"></span><br><span class="line">git status   查看仓库当前的状态</span><br><span class="line"></span><br><span class="line">git diff   查看具体修改内容</span><br><span class="line"></span><br><span class="line">git add &lt;file&gt;   用如下命令把文件添加到仓库</span><br><span class="line"></span><br><span class="line">git commit -m <span class="string">"&lt;message&gt;"</span>   把文件提交到仓库</span><br><span class="line"></span><br><span class="line">git <span class="built_in">log</span> (--pretty=oneline)   查看提交记录（简略信息）</span><br><span class="line"></span><br><span class="line">git reset --hard HEAD^^   回退到上上个版本</span><br><span class="line"></span><br><span class="line">git reset --hard HEAD~100   回退到前100个版本</span><br><span class="line"></span><br><span class="line">git reset --hard 1094a   回退到版本号为 1094a... 的版本</span><br><span class="line"></span><br><span class="line">git reflog   查看操作记录（可查看回退前的版本号）</span><br><span class="line"></span><br><span class="line">git diff HEAD -- &lt;file&gt;   查看工作区和最新版本的区别</span><br><span class="line"></span><br><span class="line">git checkout -- r&lt;file&gt;   撤销文件在工作区的全部修改</span><br><span class="line"></span><br><span class="line">git reset HEAD &lt;file&gt;   撤销暂存区的修改，放回工作区</span><br><span class="line"></span><br><span class="line">rm &lt;file&gt;/git rm &lt;file&gt;   删除文件并放到暂存区</span><br></pre></td></tr></table></figure>
