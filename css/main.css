@@ -1307,7 +1307,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #a2613d;
+  background: #6346bf;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2763,13 +2763,10 @@ table {
 .btn {
   background: #f4f4f4;
   border: 1px solid #555;
-  border-radius: 7px;
+  border-radius: 6px;
   color: #555;
-  font-size: 0.8em;
+  font-size: 0.9em;
   opacity: 0.8;
-}
-h1 {
-  font-size: 1.7em;
 }
 .sidebar {
   background: rgba(255,255,255,0);
