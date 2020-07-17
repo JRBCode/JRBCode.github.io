@@ -3969,7 +3969,7 @@
 <ul>
 <li><strong>网站存放在子目录</strong></li>
 </ul>
-<p>如果您的网站存放在子目录中，例如 <a href="http://yoursite.com/blog，则请将您的" target="_blank" rel="noopener">http://yoursite.com/blog，则请将您的</a> url 设为 <a href="http://yoursite.com/blog" target="_blank" rel="noopener">http://yoursite.com/blog</a> 并把 root 设为/blog/。</p>
+<p>如果您的网站存放在子目录中，例如 <a href="http://yoursite.com/blog，" target="_blank" rel="noopener">http://yoursite.com/blog，</a> 则请将您的 url 设为 <a href="http://yoursite.com/blog" target="_blank" rel="noopener">http://yoursite.com/blog</a> 并把 root 设为/blog/。</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 比如，一个页面的永久链接是 http://example.com/foo/bar/index.html</span></span><br><span class="line"><span class="attr">pretty_urls:</span></span><br><span class="line">	<span class="attr">trailing_index:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 此时页面的永久链接会变为 http://example.com/foo/bar/</span></span><br></pre></td></tr></table></figure>
 
 <ol start="3">
@@ -4204,7 +4204,7 @@
 <ul>
 <li>上述方法不太理想，还可以在themes\next\source\css\_variables\base.styl中修改。</li>
 </ul>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">// Font size</span><br><span class="line">$font-size-base           = (hexo-config('font.enable') and hexo-config('font.global.size') is a 'unit') ? unit(hexo-config('font.global.size'), em) : .75em;  //整体大小</span><br><span class="line">$font-size-smallest       = .7em;         //首页阅读时长等</span><br><span class="line">$font-size-smaller        = 1.05em;       //侧边栏（归档等）</span><br><span class="line">$font-size-small          = .925em;       //侧边栏目录、阅读全文按钮、文中表格及代码块</span><br><span class="line">$font-size-medium         = 1em;          //头像下边日志、分类、标签</span><br><span class="line">$font-size-large          = 1.25em;       //首页文章标题及文章内容</span><br><span class="line">$font-size-larger         = 1.25em;</span><br><span class="line">$font-size-largest        = 2em;          //用户名</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">// Font size</span><br><span class="line">$font-size-base           = (hexo-config('font.enable') and hexo-config('font.global.size') is a 'unit') ? unit(hexo-config('font.global.size'), em) : .75em;  //整体大小</span><br><span class="line">$font-size-smallest       = .7em;         //首页阅读时长等</span><br><span class="line">$font-size-smaller        = 1.05em;       //侧边栏（归档等）</span><br><span class="line">$font-size-small          = .925em;       //侧边栏目录、阅读全文按钮、文中表格及代码块</span><br><span class="line">$font-size-medium         = 1em;          //头像下边日志、分类、标签</span><br><span class="line">$font-size-large          = 1.3em;       //首页文章标题及文章内容</span><br><span class="line">$font-size-larger         = 1.25em;</span><br><span class="line">$font-size-largest        = 2em;          //用户名</span><br></pre></td></tr></table></figure>
 
 
 <h2 id="设置菜单及页面"><a href="#设置菜单及页面" class="headerlink" title="设置菜单及页面"></a>设置菜单及页面</h2><ul>
