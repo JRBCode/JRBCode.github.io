@@ -1307,7 +1307,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #9882d5;
+  background: #186ff2;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2760,9 +2760,6 @@ body {
 table {
   opacity: 0.9;
 }
-img {
-  opacity: 0.8;
-}
 h1 {
   font-size: 1.6em;
 }
@@ -2791,7 +2788,7 @@ h1 {
   border-radius: 15px;
 }
 .highlight-wrap {
-  opacity: 0.9;
+  opacity: 0.95;
 }
 .post-copyright {
   opacity: 0.8;
