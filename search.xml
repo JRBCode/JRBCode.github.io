@@ -4384,7 +4384,74 @@
 </ul>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Reading progress bar</span></span><br><span class="line"><span class="attr">reading_progress:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Available values: top | bottom</span></span><br><span class="line">  <span class="attr">position:</span> <span class="string">top</span>        <span class="comment"># 进度条在页面中显示的位置：顶部/底部</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">"#37c6c0"</span>     <span class="comment"># 进度条颜色</span></span><br><span class="line">  <span class="attr">height:</span> <span class="string">3px</span>          <span class="comment"># 进度条宽度</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="页面加载进度条"><a href="#页面加载进度条" class="headerlink" title="页面加载进度条"></a>页面加载进度条</h2><ol>
+<li><p>进入博客文件夹的/themes/next文件夹下</p>
+</li>
+<li><p>下载安装 Progress module，如下：</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/theme-next/theme-next-pace <span class="built_in">source</span>/lib/pace</span><br></pre></td></tr></table></figure>
 
+<ol start="3">
+<li>在/themes/next/_config.yml中设置，如下</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Progress bar in the top during page loading.</span></span><br><span class="line"><span class="comment"># Dependencies: https://github.com/theme-next/theme-next-pace</span></span><br><span class="line"><span class="comment"># For more information: https://github.com/HubSpot/pace</span></span><br><span class="line"><span class="attr">pace:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Themes list:</span></span><br><span class="line">  <span class="comment"># big-counter | bounce | barber-shop | center-atom | center-circle | center-radar | center-simple</span></span><br><span class="line">  <span class="comment"># corner-indicator | fill-left | flat-top | flash | loading-bar | mac-osx | material | minimal</span></span><br><span class="line">  <span class="attr">theme:</span> <span class="string">center-atom</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>不同加载特效示例图</li>
+</ol>
+<ul>
+<li>big-counter</li>
+</ul>
+<p><img src="https://blog.pangao.vip/pic/Hexo%E5%8D%9A%E5%AE%A2NexT%E4%B8%BB%E9%A2%98%E7%BE%8E%E5%8C%96%E4%B9%8B%E9%A1%B6%E9%83%A8%E5%8A%A0%E8%BD%BD%E8%BF%9B%E5%BA%A6%E6%9D%A1-2.gif" alt=""></p>
+<ul>
+<li>bounce</li>
+</ul>
+<p><img src="https://blog.pangao.vip/pic/Hexo%E5%8D%9A%E5%AE%A2NexT%E4%B8%BB%E9%A2%98%E7%BE%8E%E5%8C%96%E4%B9%8B%E9%A1%B6%E9%83%A8%E5%8A%A0%E8%BD%BD%E8%BF%9B%E5%BA%A6%E6%9D%A1-3.gif" alt=""></p>
+<ul>
+<li>barber-shop</li>
+</ul>
+<p><img src="https://blog.pangao.vip/pic/Hexo%E5%8D%9A%E5%AE%A2NexT%E4%B8%BB%E9%A2%98%E7%BE%8E%E5%8C%96%E4%B9%8B%E9%A1%B6%E9%83%A8%E5%8A%A0%E8%BD%BD%E8%BF%9B%E5%BA%A6%E6%9D%A1-4.gif" alt=""></p>
+<ul>
+<li>center-atom</li>
+</ul>
+<p><img src="https://blog.pangao.vip/pic/Hexo%E5%8D%9A%E5%AE%A2NexT%E4%B8%BB%E9%A2%98%E7%BE%8E%E5%8C%96%E4%B9%8B%E9%A1%B6%E9%83%A8%E5%8A%A0%E8%BD%BD%E8%BF%9B%E5%BA%A6%E6%9D%A1-5.gif" alt=""></p>
+<ul>
+<li>center-circle</li>
+</ul>
+<p><img src="https://blog.pangao.vip/pic/Hexo%E5%8D%9A%E5%AE%A2NexT%E4%B8%BB%E9%A2%98%E7%BE%8E%E5%8C%96%E4%B9%8B%E9%A1%B6%E9%83%A8%E5%8A%A0%E8%BD%BD%E8%BF%9B%E5%BA%A6%E6%9D%A1-6.gif" alt=""></p>
+<ul>
+<li>center-radar</li>
+</ul>
+<p><img src="https://blog.pangao.vip/pic/Hexo%E5%8D%9A%E5%AE%A2NexT%E4%B8%BB%E9%A2%98%E7%BE%8E%E5%8C%96%E4%B9%8B%E9%A1%B6%E9%83%A8%E5%8A%A0%E8%BD%BD%E8%BF%9B%E5%BA%A6%E6%9D%A1-7.gif" alt=""></p>
+<ul>
+<li>center-simple</li>
+</ul>
+<p><img src="https://blog.pangao.vip/pic/Hexo%E5%8D%9A%E5%AE%A2NexT%E4%B8%BB%E9%A2%98%E7%BE%8E%E5%8C%96%E4%B9%8B%E9%A1%B6%E9%83%A8%E5%8A%A0%E8%BD%BD%E8%BF%9B%E5%BA%A6%E6%9D%A1-8.gif" alt=""></p>
+<ul>
+<li>corner-indicator</li>
+</ul>
+<p><img src="https://blog.pangao.vip/pic/Hexo%E5%8D%9A%E5%AE%A2NexT%E4%B8%BB%E9%A2%98%E7%BE%8E%E5%8C%96%E4%B9%8B%E9%A1%B6%E9%83%A8%E5%8A%A0%E8%BD%BD%E8%BF%9B%E5%BA%A6%E6%9D%A1-9.gif" alt=""></p>
+<ul>
+<li>fill-left</li>
+</ul>
+<p><img src="https://blog.pangao.vip/pic/Hexo%E5%8D%9A%E5%AE%A2NexT%E4%B8%BB%E9%A2%98%E7%BE%8E%E5%8C%96%E4%B9%8B%E9%A1%B6%E9%83%A8%E5%8A%A0%E8%BD%BD%E8%BF%9B%E5%BA%A6%E6%9D%A1-10.gif" alt=""></p>
+<ul>
+<li>flash</li>
+</ul>
+<p><img src="https://blog.pangao.vip/pic/Hexo%E5%8D%9A%E5%AE%A2NexT%E4%B8%BB%E9%A2%98%E7%BE%8E%E5%8C%96%E4%B9%8B%E9%A1%B6%E9%83%A8%E5%8A%A0%E8%BD%BD%E8%BF%9B%E5%BA%A6%E6%9D%A1-11.gif" alt=""></p>
+<ul>
+<li>loading-bar</li>
+</ul>
+<p><img src="https://blog.pangao.vip/pic/Hexo%E5%8D%9A%E5%AE%A2NexT%E4%B8%BB%E9%A2%98%E7%BE%8E%E5%8C%96%E4%B9%8B%E9%A1%B6%E9%83%A8%E5%8A%A0%E8%BD%BD%E8%BF%9B%E5%BA%A6%E6%9D%A1-12.gif" alt=""></p>
+<ul>
+<li>mac-osx</li>
+</ul>
+<p><img src="https://blog.pangao.vip/pic/Hexo%E5%8D%9A%E5%AE%A2NexT%E4%B8%BB%E9%A2%98%E7%BE%8E%E5%8C%96%E4%B9%8B%E9%A1%B6%E9%83%A8%E5%8A%A0%E8%BD%BD%E8%BF%9B%E5%BA%A6%E6%9D%A1-13.gif" alt=""></p>
+<ul>
+<li>minimal</li>
+</ul>
+<p><img src="https://blog.pangao.vip/pic/Hexo%E5%8D%9A%E5%AE%A2NexT%E4%B8%BB%E9%A2%98%E7%BE%8E%E5%8C%96%E4%B9%8B%E9%A1%B6%E9%83%A8%E5%8A%A0%E8%BD%BD%E8%BF%9B%E5%BA%A6%E6%9D%A1-14.gif" alt=""></p>
 <h2 id="添加搜索功能"><a href="#添加搜索功能" class="headerlink" title="添加搜索功能"></a>添加搜索功能</h2><ol>
 <li>安装 hexo-generator-searchdb，在站点的根目录下执行以下命令：</li>
 </ol>
@@ -4446,10 +4513,9 @@
 
 
 <h2 id="添加书签"><a href="#添加书签" class="headerlink" title="添加书签"></a>添加书签</h2><ul>
-<li>在themes/next/下的_config.yml文件中搜索bookmark，修改相关信息：</li>
+<li>在 themes/next/ 下的 _config.yml 文件中搜索 bookmark，修改相关信息：</li>
 </ul>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Bookmark Support</span></span><br><span class="line"><span class="attr">bookmark:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># 书签颜色</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">"#222"</span></span><br><span class="line">  <span class="comment"># 如果为auto，请在关闭页面或单击书签图标时保存阅读进度。</span></span><br><span class="line">  <span class="comment"># 如果为manual，则只能通过单击书签图标进行保存。</span></span><br><span class="line">  <span class="attr">save:</span> <span class="string">auto</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Bookmark Support</span></span><br><span class="line"><span class="attr">bookmark:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># 书签颜色</span></span><br><span class="line">  <span class="comment"># color: "#222"</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">"#e8e8e8"</span></span><br><span class="line">  <span class="comment"># 如果为auto，请在关闭页面或单击书签图标时保存阅读进度。</span></span><br><span class="line">  <span class="comment"># 如果为manual，则只能通过单击书签图标进行保存。</span></span><br><span class="line">  <span class="attr">save:</span> <span class="string">auto</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="阅读更多按钮"><a href="#阅读更多按钮" class="headerlink" title="阅读更多按钮"></a>阅读更多按钮</h2><ul>
 <li>打开themes/next/下的_config.yml，查找read_more_btn：</li>
