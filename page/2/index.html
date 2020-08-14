@@ -593,6 +593,393 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jrbcode.gitee.io/posts/be9758cd.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CodeHeap">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CodeHeap">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/be9758cd.html" class="post-title-link" itemprop="url">Hexo+NexT博客归档/标签/分类页美化</a>
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 23:12:31" itemprop="dateCreated datePublished" datetime="2020-03-20T23:12:31+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-14 23:27:10" itemprop="dateModified" datetime="2020-08-14T23:27:10+08:00">2020-08-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E6%8A%80%E6%9C%AF%E7%B1%BB/" itemprop="url" rel="index">
+                    <span itemprop="name">技术类</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/posts/be9758cd.html#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/be9758cd.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<h1 id="彩色标签页"><a href="#彩色标签页" class="headerlink" title="彩色标签页"></a>彩色标签页</h1><ol>
+<li>在 /themes/next/layout/ 目录下，新增 tag-color.swig 文件，填入如下内容:</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type="text/javascript"&gt;</span><br><span class="line">     var alltags = document.getElementsByClassName('tag-cloud-tags');</span><br><span class="line">     var tags = alltags[0].getElementsByTagName('a');</span><br><span class="line">     for (var i = tags.length - 1; i &gt;= 0; i--) &#123;</span><br><span class="line">       var r=Math.floor(Math.random()*75+130);</span><br><span class="line">       var g=Math.floor(Math.random()*75+100);</span><br><span class="line">       var b=Math.floor(Math.random()*75+80);</span><br><span class="line">       tags[i].style.background = "rgb("+r+","+g+","+b+")";</span><br><span class="line">     &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;<span class="selector-tag">style</span>&gt;</span><br><span class="line">  <span class="selector-class">.tag-cloud-tags</span>&#123;</span><br><span class="line">    <span class="comment">/*font-family: Helvetica, Tahoma, Arial;*/</span></span><br><span class="line">    <span class="comment">/*font-weight: 100;*/</span></span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">counter-reset</span>: tags;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-class">.tag-cloud-tags</span> <span class="selector-tag">a</span>&#123;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">6px</span>;</span><br><span class="line">    <span class="attribute">padding-right</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">padding-left</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">8px</span> <span class="number">5px</span> <span class="number">0px</span> <span class="number">0px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-class">.tag-cloud-tags</span> <span class="selector-tag">a</span><span class="selector-pseudo">:before</span>&#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">"🔖"</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-class">.tag-cloud-tags</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">     <span class="attribute">box-shadow</span>: <span class="number">0px</span> <span class="number">5px</span> <span class="number">15px</span> <span class="number">0px</span> <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">4</span>);</span><br><span class="line">     <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">1.1</span>);</span><br><span class="line">     <span class="comment">/*box-shadow: 10px 10px 15px 2px rgba(0,0,0,.12), 0 0 6px 0 rgba(104, 104, 105, 0.1);*/</span></span><br><span class="line">     <span class="attribute">transition-duration</span>: <span class="number">0.15s</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在同级目录的 page.swig 中引入 tag-color.swig</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">    <span class="string">&lt;div</span> <span class="string">class="tag-cloud"&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="string">&lt;!--</span> <span class="string">目前共计xxx个标签</span></span><br><span class="line">        <span class="string">&lt;div</span> <span class="string">class="tag-cloud-title"&gt;</span></span><br><span class="line">            <span class="string">&#123;&#123;</span> <span class="string">_p('counter.tag_cloud',</span> <span class="string">site.tags.length)</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="string">&lt;/div&gt;</span></span><br><span class="line">        <span class="string">--&gt;</span></span><br><span class="line">    </span><br><span class="line">        <span class="string">&lt;div</span> <span class="string">class="tag-cloud-tags"&gt;</span></span><br><span class="line">          <span class="string">&#123;&#123;</span> <span class="string">tagcloud(&#123;min_font:</span> <span class="number">10</span><span class="string">,</span> <span class="attr">max_font:</span> <span class="number">15</span><span class="string">,</span> <span class="attr">amount:</span> <span class="number">300</span><span class="string">,</span> <span class="attr">color:</span> <span class="literal">true</span><span class="string">,</span> <span class="attr">start_color:</span> <span class="string">'#ccc'</span><span class="string">,</span> <span class="attr">end_color:</span> <span class="string">'#111'</span><span class="string">&#125;)</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="string">&lt;/div&gt;</span></span><br><span class="line">      <span class="string">&lt;/div&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="string">+</span>     <span class="string">&#123;%</span> <span class="string">include</span> <span class="string">'tag-color.swig'</span> <span class="string">%&#125;</span></span><br><span class="line">    </span><br><span class="line">    <span class="string">&#123;%</span> <span class="string">elif</span> <span class="string">page.type</span> <span class="string">===</span> <span class="string">'categories'</span> <span class="string">%&#125;</span></span><br><span class="line">      <span class="string">&lt;div</span> <span class="string">class="category-all-page"&gt;</span></span><br><span class="line">        <span class="string">&lt;div</span> <span class="string">class="category-all-title"&gt;</span></span><br><span class="line">            <span class="string">&#123;&#123;</span> <span class="string">_p('counter.categories',</span> <span class="string">site.categories.length)</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="string">&lt;/div&gt;</span></span><br><span class="line">        <span class="string">&lt;div</span> <span class="string">class="category-all"&gt;</span></span><br><span class="line">          <span class="string">&#123;&#123;</span> <span class="string">list_categories()</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="string">&lt;/div&gt;</span></span><br><span class="line">      <span class="string">&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>以下是文章底部的标签样式（代码拷入 /themes/next/source/css/_schemes/(自己选择的主题)/index.styl 即可）：</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*文章底部标签样式*/</span></span><br><span class="line"><span class="selector-class">.posts-expand</span> <span class="selector-class">.post-tags</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">-webkit-box-shadow</span>: <span class="number">0</span> <span class="number">1px</span> <span class="number">3px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, .<span class="number">12</span>), <span class="number">0</span> <span class="number">1px</span> <span class="number">2px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, .<span class="number">24</span>);</span><br><span class="line">  <span class="attribute">-moz-box-shadow</span>: <span class="number">0</span> <span class="number">1px</span> <span class="number">3px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, .<span class="number">12</span>), <span class="number">0</span> <span class="number">1px</span> <span class="number">2px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, .<span class="number">24</span>);</span><br><span class="line">  <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">1px</span> <span class="number">3px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, .<span class="number">12</span>), <span class="number">0</span> <span class="number">1px</span> <span class="number">2px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, .<span class="number">24</span>);</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">'Comic Sans MS'</span>, sans-serif;</span><br><span class="line">  <span class="attribute">transition</span>: .<span class="number">2s</span> ease-out;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">3px</span> <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#f5f5f5</span>;</span><br><span class="line">  <span class="attribute">border-bottom</span>: none;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">15px</span>;</span><br><span class="line"></span><br><span class="line">  +mobile()&#123;</span><br><span class="line">    <span class="selector-tag">padding</span>: 1<span class="selector-tag">px</span> 3<span class="selector-tag">px</span>;</span><br><span class="line">    <span class="selector-tag">font-size</span>: 8<span class="selector-tag">px</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">100</span>,<span class="number">154</span>,<span class="number">182</span>,<span class="number">0.902</span>);</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">-webkit-box-shadow</span>: <span class="number">0</span> <span class="number">8px</span> <span class="number">16px</span> <span class="number">0</span> <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.2</span>), <span class="number">0</span> <span class="number">6px</span> <span class="number">20px</span> <span class="number">0</span> <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.19</span>);</span><br><span class="line">    <span class="attribute">-moz-box-shadow</span>: <span class="number">0</span> <span class="number">8px</span> <span class="number">16px</span> <span class="number">0</span> <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.2</span>), <span class="number">0</span> <span class="number">6px</span> <span class="number">20px</span> <span class="number">0</span> <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.19</span>);</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">8px</span> <span class="number">16px</span> <span class="number">0</span> <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.2</span>), <span class="number">0</span> <span class="number">6px</span> <span class="number">20px</span> <span class="number">0</span> <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.19</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现效果如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200720163022829.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+<h1 id="归档页美化"><a href="#归档页美化" class="headerlink" title="归档页美化"></a>归档页美化</h1><ol>
+<li>修改 /themes/next/ layout/_ macro/post collapse.swig 后的代码如下:</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&#123;% macro render(posts) %&#125;</span><br><span class="line">&#123;%- set current_year = '1970' %&#125;</span><br><span class="line">&#123;%- for post in posts.toArray() %&#125;</span><br><span class="line"></span><br><span class="line">  &#123;%- set year = date(post.date, 'YYYY') %&#125;</span><br><span class="line"></span><br><span class="line">  &#123;%- if year !== current_year %&#125;</span><br><span class="line">    &#123;%- set current_year = year %&#125;</span><br><span class="line">    &lt;div class="collection-year"&gt;</span><br><span class="line">      &lt;&#123;%- if theme.seo %&#125;h2&#123;% else %&#125;h1&#123;%- endif %&#125; class="collection-header"&gt;&#123;&#123; current_year &#125;&#125;&lt;/&#123;%- if theme.seo %&#125;h2&#123;% else %&#125;h1&#123;%- endif %&#125;&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &#123;%- endif %&#125;</span><br><span class="line"></span><br><span class="line">  &lt;article class="my-post post-type-&#123;&#123; post.type | default('normal') &#125;&#125;" itemscope itemtype="http://schema.org/Article"&gt;</span><br><span class="line">    &lt;header class="my-post-header"&gt;</span><br><span class="line"></span><br><span class="line">      &lt;div class="my-post-meta"&gt;</span><br><span class="line">        &lt;time class="my-post-time" itemprop="dateCreated"</span><br><span class="line">              datetime="&#123;&#123; moment(post.date).format() &#125;&#125;"</span><br><span class="line">              content="&#123;&#123; date(post.date, config.date_format) &#125;&#125;"&gt;</span><br><span class="line">          &#123;&#123; date(post.date, 'MM-DD') &#125;&#125;</span><br><span class="line">        &lt;/time&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">      &lt;&#123;%- if theme.seo %&#125;h3&#123;% else %&#125;h2&#123;%- endif %&#125; class="my-post-title"&gt;</span><br><span class="line">        &#123;%- if post.link %&#125;&#123;# Link posts #&#125;</span><br><span class="line">          &lt;a class="my-post-title-link post-title-link-external" target="_blank" href="&#123;&#123; url_for(post.link) &#125;&#125;" itemprop="url"&gt;</span><br><span class="line">            &#123;&#123; post.title or post.link &#125;&#125;</span><br><span class="line">            &lt;i class="fa fa-external-link"&gt;&lt;/i&gt;</span><br><span class="line">          &lt;/a&gt;</span><br><span class="line">        &#123;% else %&#125;</span><br><span class="line">          &lt;a class="my-post-title-link" href="&#123;&#123; url_for(post.path) &#125;&#125;" itemprop="url"&gt;</span><br><span class="line">            &#123;% if post.type === 'picture' %&#125;</span><br><span class="line">              &#123;&#123; post.content &#125;&#125;</span><br><span class="line">            &#123;% else %&#125;</span><br><span class="line">              &lt;span itemprop="name"&gt;&#123;&#123; post.title or __('post.untitled') &#125;&#125;&lt;/span&gt;</span><br><span class="line">            &#123;% endif %&#125;</span><br><span class="line">          &lt;/a&gt;</span><br><span class="line">        &#123;%- endif %&#125;</span><br><span class="line">      &lt;/&#123;%- if theme.seo %&#125;h3&#123;% else %&#125;h2&#123;%- endif %&#125;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/header&gt;</span><br><span class="line">  &lt;/article&gt;</span><br><span class="line"></span><br><span class="line">&#123;%- endfor %&#125;</span><br><span class="line">&#123;% endmacro %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>主要修改：一是将 post-meta这个div移到前面header 标签下；二是将所有的 class 属性都加上 my-，例如 my-post-meta，这样改动是为了不影响其它页面引用的样式。</p>
+<ol start="2">
+<li>在 /themes/next/source/css/_schemes/(自己选择的主题)/index.styl 新增如下样式：</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 归档页样式 began */</span></span><br><span class="line"><span class="selector-class">.page-archive</span> <span class="selector-class">.archive-page-counter</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#49b1f5</span>;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">padding-right</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">8px</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  +mobile() &#123;</span><br><span class="line">    <span class="selector-tag">font-size</span>: 16<span class="selector-tag">px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.my-post-time</span>&#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">11px</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#49b1f5</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">padding-right</span>: <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: <span class="number">15px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.mypost</span>&#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="number">1rem</span>;</span><br><span class="line">  <span class="attribute">-webkit-transition</span>: all .<span class="number">2s</span> ease-in-out;</span><br><span class="line">  <span class="attribute">-moz-transition</span>: all .<span class="number">2s</span> ease-in-out;</span><br><span class="line">  <span class="attribute">-o-transition</span>: all .<span class="number">2s</span> ease-in-out;</span><br><span class="line">  <span class="attribute">-ms-transition</span>: all .<span class="number">2s</span> ease-in-out;</span><br><span class="line">  <span class="attribute">transition</span>: all .<span class="number">2s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-class">.my-post-title-link</span><span class="selector-pseudo">:before</span>&#123;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">18px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">18px</span>;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">"📚"</span>;</span><br><span class="line">  <span class="attribute">margin-right</span>: <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">font</span>: normal normal normal <span class="number">14px</span>/<span class="number">1</span> FontAwesome;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">15px</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">18px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.my-post</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">1.1</span>);</span><br><span class="line">  <span class="attribute">box-shadow</span>: <span class="number">10px</span> <span class="number">10px</span> <span class="number">15px</span> <span class="number">2px</span> <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">12</span>), <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="number">0</span> <span class="built_in">rgba</span>(<span class="number">104</span>, <span class="number">104</span>, <span class="number">105</span>, <span class="number">0.1</span>);</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">1px</span> <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: <span class="number">25px</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">  <span class="attribute">transition-duration</span>: <span class="number">0.15s</span>;</span><br><span class="line">  +mobile()&#123;</span><br><span class="line">    <span class="selector-tag">width</span>: 260<span class="selector-tag">px</span>;</span><br><span class="line">    <span class="selector-tag">margin-left</span>: 18<span class="selector-tag">px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  //display:flex;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-class">.my-post-title-link</span>&#123;</span><br><span class="line">  <span class="attribute">text-decoration</span>: none;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">15px</span>;</span><br><span class="line">  <span class="attribute">font-weight</span>: <span class="number">400</span>;</span><br><span class="line">  +mobile() &#123;</span><br><span class="line">    <span class="selector-tag">font-size</span>: 14<span class="selector-tag">px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.my-post-title</span>&#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">margin-left</span>: <span class="number">4.5rem</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#4c4948</span>;</span><br><span class="line">  <span class="attribute">text-decoration</span>: none;</span><br><span class="line">  <span class="attribute">font-size</span>: .<span class="number">8rem</span>;</span><br><span class="line">  <span class="attribute">cursor</span>: pointer;</span><br><span class="line">  +mobile() &#123;</span><br><span class="line">    //margin-left: 4rem;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.my-post-header</span>&#123;</span><br><span class="line">  <span class="attribute">position</span>: top;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="number">1rem</span>;</span><br><span class="line">  <span class="attribute">-webkit-transition</span>: all .<span class="number">2s</span> ease-in-out;</span><br><span class="line">  <span class="attribute">-moz-transition</span>: all .<span class="number">2s</span> ease-in-out;</span><br><span class="line">  <span class="attribute">-o-transition</span>: all .<span class="number">2s</span> ease-in-out;</span><br><span class="line">  <span class="attribute">-ms-transition</span>: all .<span class="number">2s</span> ease-in-out;</span><br><span class="line">  <span class="attribute">transition</span>: all .<span class="number">2s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line">//.my-post-title-link&#123;</span><br><span class="line">//  font-size: 16px;</span><br><span class="line">//  font-weight: 500;</span><br><span class="line">//&#125;</span><br><span class="line"><span class="selector-class">.my-post-meta</span>&#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#99a9bf</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">80px</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#114142</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-class">.post-block</span><span class="selector-class">.tag</span> <span class="selector-class">.collection-title</span> <span class="selector-tag">h2</span> &#123;</span><br><span class="line">  <span class="attribute">border-width</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">border-style</span>: solid;</span><br><span class="line">  <span class="attribute">border-color</span>: <span class="number">#3f3f3f</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">22px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#b4e8fa</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">2px</span> <span class="number">15px</span>;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: <span class="number">1.5px</span>;</span><br><span class="line">  <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#3f3f3f</span>;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">10px</span> <span class="number">0</span> <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  +mobile()&#123;</span><br><span class="line">    <span class="selector-tag">font-size</span>: 18<span class="selector-tag">px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 归档页样式 end */</span></span><br></pre></td></tr></table></figure>
+
+<p>实现效果如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200720163209724.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+<h1 id="分类页美化"><a href="#分类页美化" class="headerlink" title="分类页美化"></a>分类页美化</h1><p>在 /themes/next/source/css/_schemes/(自己选择的主题)/index.styl 新增如下样式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 分类页样式 began */</span></span><br><span class="line"><span class="selector-class">.category-list-link</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">1.1</span>);</span><br><span class="line">  <span class="attribute">box-shadow</span>: <span class="number">10px</span> <span class="number">10px</span> <span class="number">15px</span> <span class="number">2px</span> <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">12</span>), <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="number">0</span> <span class="built_in">rgba</span>(<span class="number">104</span>, <span class="number">104</span>, <span class="number">105</span>, <span class="number">0.1</span>);</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">15px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">6px</span> <span class="number">16px</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: <span class="number">0px</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">  <span class="attribute">transition-duration</span>: <span class="number">0.15s</span>;</span><br><span class="line">  //display:flex;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-class">.category-list-link</span><span class="selector-pseudo">:before</span>&#123;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">18px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">18px</span>;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">"📚"</span>;</span><br><span class="line">  <span class="attribute">margin-right</span>: <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">font</span>: normal normal normal <span class="number">14px</span>/<span class="number">1</span> FontAwesome;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">15px</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">18px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 分类页样式 end */</span></span><br></pre></td></tr></table></figure>
+
+<p>实现效果如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200720172136778.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70" alt=""></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jrbcode.gitee.io/posts/80095cae.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CodeHeap">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CodeHeap">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/80095cae.html" class="post-title-link" itemprop="url">在Hexo+NexT博客中设置鼠标点击特效</a>
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-12 10:57:39" itemprop="dateCreated datePublished" datetime="2020-03-12T10:57:39+08:00">2020-03-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-14 23:21:27" itemprop="dateModified" datetime="2020-08-14T23:21:27+08:00">2020-08-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E6%8A%80%E6%9C%AF%E7%B1%BB/" itemprop="url" rel="index">
+                    <span itemprop="name">技术类</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/posts/80095cae.html#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/80095cae.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>13k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>12 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>Hexo+NexT博客中可以设置鼠标点击后的特效，本文介绍了四种特效（fireworks：<code>礼花</code>；explosion：<code>爆炸</code>；love：<code>浮出爱心</code>；text：<code>浮出文字</code>）。</p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/80095cae.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jrbcode.gitee.io/posts/4b12cb59.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CodeHeap">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CodeHeap">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/4b12cb59.html" class="post-title-link" itemprop="url">在Hexo+NexT博客中添加主页轮播图</a>
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-25 22:38:06" itemprop="dateCreated datePublished" datetime="2020-02-25T22:38:06+08:00">2020-02-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-14 23:21:11" itemprop="dateModified" datetime="2020-08-14T23:21:11+08:00">2020-08-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E6%8A%80%E6%9C%AF%E7%B1%BB/" itemprop="url" rel="index">
+                    <span itemprop="name">技术类</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/posts/4b12cb59.html#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/4b12cb59.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>在Hexo+NexT博客主页中可以添加自定义的轮播图，我们可以设置图片的数量以及添加自定义图片，同时还可以设置点击图片跳到的链接地址，本文就来介绍如何在博客主页中添加自定义轮播图。</p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/4b12cb59.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jrbcode.gitee.io/posts/d8fb208b.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -875,7 +1262,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
