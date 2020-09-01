@@ -56,23 +56,26 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="CodeHeap">
-<meta property="og:url" content="https://jrbcode.gitee.io/tags/%E6%B3%9B%E5%9E%8B/index.html">
+  <meta name="description" content="TCP报文格式 在了解三次握手和四次挥手之前，先知道TCP报文内部包含了哪些东西。   TCP报头中的源端口号和目的端口号同IP数据报中的源IP与目的IP唯一确定一条TCP连接。TCP在发送数据前必须在彼此间建立连接，这里连接意思是：双方需要内保存对方信息（例如：IP，Port…）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP-三次握手和四次挥手">
+<meta property="og:url" content="https://jrbcode.gitee.io/posts/cdbbe57d.html">
 <meta property="og:site_name" content="CodeHeap">
+<meta property="og:description" content="TCP报文格式 在了解三次握手和四次挥手之前，先知道TCP报文内部包含了哪些东西。   TCP报头中的源端口号和目的端口号同IP数据报中的源IP与目的IP唯一确定一条TCP连接。TCP在发送数据前必须在彼此间建立连接，这里连接意思是：双方需要内保存对方信息（例如：IP，Port…）">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWcyMDE4LmNuYmxvZ3MuY29tL2Jsb2cvMTM0NDI1MC8yMDE5MDQvMTM0NDI1MC0yMDE5MDQwMjExMjIyMzIyOC0xMDcyNDM5Ni5wbmc?x-oss-process=image/format,png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200901145659591.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020090114572524.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="article:published_time" content="2020-09-01T06:34:07.000Z">
+<meta property="article:modified_time" content="2020-09-01T06:57:41.566Z">
 <meta property="article:author" content="CodeHeap">
-<meta property="article:tag" content="技术博客">
-<meta property="article:tag" content="CodeHeap">
-<meta property="article:tag" content="Hexo">
-<meta property="article:tag" content="Next">
-<meta property="article:tag" content="Git">
-<meta property="article:tag" content="Github">
-<meta property="article:tag" content="Python">
-<meta property="article:tag" content="Java">
+<meta property="article:tag" content="TCP">
+<meta property="article:tag" content=" 三次握手">
+<meta property="article:tag" content=" 四次挥手">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWcyMDE4LmNuYmxvZ3MuY29tL2Jsb2cvMTM0NDI1MC8yMDE5MDQvMTM0NDI1MC0yMDE5MDQwMjExMjIyMzIyOC0xMDcyNDM5Ni5wbmc?x-oss-process=image/format,png">
 
-<link rel="canonical" href="https://jrbcode.gitee.io/tags/%E6%B3%9B%E5%9E%8B/">
+<link rel="canonical" href="https://jrbcode.gitee.io/posts/cdbbe57d.html">
 
 
 <script id="page-configurations">
@@ -80,7 +83,7 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
@@ -93,7 +96,7 @@
   
    <!--新增：鼠标点击特效-->
   <script src="/lib/live2d-widget/autoload.js"></script> <!--新增：板娘live2d模型-->
-  <title>标签: 泛型 | CodeHeap</title>
+  <title>TCP-三次握手和四次挥手 | CodeHeap</title>
   
 
 
@@ -238,56 +241,248 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">泛型
-          <small>标签</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jrbcode.gitee.io/posts/cdbbe57d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CodeHeap">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CodeHeap">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          TCP-三次握手和四次挥手
         </h1>
-      </div>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-01 14:34:07 / 修改时间：14:57:41" itemprop="dateCreated datePublished" datetime="2020-09-01T14:34:07+08:00">2020-09-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/posts/cdbbe57d.html#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/cdbbe57d.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2020</h1>
+        <h1 id="TCP报文格式"><a href="#TCP报文格式" class="headerlink" title="TCP报文格式"></a>TCP报文格式</h1><blockquote>
+<p>在了解<code>三次握手</code>和<code>四次挥手</code>之前，先知道<code>TCP报文</code>内部包含了哪些东西。</p>
+</blockquote>
+<blockquote>
+<p>TCP报头中的源端口号和目的端口号同IP数据报中的源IP与目的IP唯一确定一条TCP连接。TCP在发送数据前必须在彼此间建立连接，这里连接意思是：双方需要内保存对方信息（例如：IP，Port…）</p>
+</blockquote>
+<a id="more"></a>
+
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWcyMDE4LmNuYmxvZ3MuY29tL2Jsb2cvMTM0NDI1MC8yMDE5MDQvMTM0NDI1MC0yMDE5MDQwMjExMjIyMzIyOC0xMDcyNDM5Ni5wbmc?x-oss-process=image/format,png" alt=""></p>
+<p>报文主要段的意思</p>
+<ul>
+<li><p>序号：表示发送的数据字节流，确保TCP传输有序，对每个字节编号</p>
+</li>
+<li><p>确认序号：发送方期待接收的下一序列号，接收成功后的数据字节序列号加 1。只有ACK=1时才有效。</p>
+</li>
+<li><p>ACK：确认序号的标志，ACK=1表示确认号有效，ACK=0表示报文不含确认序号信息</p>
+</li>
+<li><p>SYN：连接请求序号标志，用于建立连接，SYN=1表示请求连接</p>
+</li>
+<li><p>FIN：结束标志，用于释放连接，为1表示关闭本方数据流</p>
+</li>
+</ul>
+<h1 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h1><h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>建立TCP连接时，需要客户端和服务器共发送3个包。</p>
+<ul>
+<li><p>第一次：客户端发送初始序号x和syn=1请求标志</p>
+</li>
+<li><p>第二次：服务器发送请求标志syn，发送确认标志ACK，发送自己的序号seq=y，发送客户端的确认序号ack=x+1</p>
+</li>
+<li><p>第三次：客户端发送ACK确认号，发送自己的序号seq=x+1，发送对方的确认号ack=y+1</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20200901145659591.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70#pic_center" alt=""></p>
+<h2 id="过程分析："><a href="#过程分析：" class="headerlink" title="过程分析："></a>过程分析：</h2><ul>
+<li><p>第一次：客户端发送请求到服务器，服务器知道客户端发送，自己接收正常。SYN=1,seq=x</p>
+</li>
+<li><p>第二次：服务器发给客户端，客户端知道自己发送、接收正常，服务器接收、发送正常。ACK=1,ack=x+1,SYN=1,seq=y</p>
+</li>
+<li><p>第三次：客户端发给服务器：服务器知道客户端发送，接收正常，自己接收，发送也正常.seq=x+1,ACK=1,ack=y+1</p>
+</li>
+</ul>
+<p>上面分析过程可以看出，握手两次达不到让双方都得出自己、对方的接收、发送能力都正常的结论的。</p>
+<h1 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h1><h2 id="过程-1"><a href="#过程-1" class="headerlink" title="过程"></a>过程</h2><ul>
+<li><p>第一次挥手：客户端发出释放FIN=1，自己序列号seq=u，进入FIN-WAIT-1状态</p>
+</li>
+<li><p>第二次挥手：服务器收到客户端的后，发出ACK=1确认标志和客户端的确认号ack=u+1，自己的序列号seq=v，进入CLOSE-WAIT状态</p>
+</li>
+<li><p>第三次挥手：客户端收到服务器确认结果后，进入FIN-WAIT-2状态。此时服务器发送释放FIN=1信号，确认标志ACK=1，确认序号ack=u+1，自己序号seq=w，服务器进入LAST-ACK（最后确认态）</p>
+</li>
+<li><p>第四次挥手：客户端收到回复后，发送确认ACK=1，ack=w+1，自己的seq=u+1，客户端进入TIME-WAIT（时间等待）。客户端经过2个最长报文段寿命后，客户端CLOSE；服务器收到确认后，立刻进入CLOSE状态。</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/2020090114572524.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTY5Mzgz,size_16,color_FFFFFF,t_70#pic_center" alt=""></p>
+<h2 id="过程分析"><a href="#过程分析" class="headerlink" title="过程分析"></a>过程分析</h2><ul>
+<li>第一次：客户端请求断开FIN,seq=u</li>
+<li>第二次：服务器确认客户端的断开请求ACK,ack=u+1,seq=v</li>
+<li>第三次：服务器请求断开FIN,seq=w,ACK,ack=u+1</li>
+<li>第四次：客户端确认服务器的断开ACK,ack=w+1,seq=u+1</li>
+</ul>
+<h1 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h1><h2 id="为什么三次握手和四次挥手？"><a href="#为什么三次握手和四次挥手？" class="headerlink" title="为什么三次握手和四次挥手？"></a>为什么三次握手和四次挥手？</h2><ul>
+<li><p>三次握手时，服务器同时把ACK和SYN放在一起发送到了客户端那里</p>
+</li>
+<li><p>四次挥手时，当收到对方的 FIN 报文时，仅仅表示对方不再发送数据了但是还能接收数据，己方是否现在关闭发送数据通道，需要上层应用来决定，因此，己方 ACK 和 FIN 一般都会分开发送。</p>
+</li>
+</ul>
+<h2 id="为什么客户端最后还要等待2MSL？"><a href="#为什么客户端最后还要等待2MSL？" class="headerlink" title="为什么客户端最后还要等待2MSL？"></a>为什么客户端最后还要等待2MSL？</h2><blockquote>
+<p>客户端需要保证最后一次发送的ACK报文到服务器，如果服务器未收到，可以请求客户端重发，这样客户端还有时间再发，重启2MSL计时。 </p>
+</blockquote>
+<h2 id="为什么建立连接是三次握手，关闭连接确是四次挥手呢？"><a href="#为什么建立连接是三次握手，关闭连接确是四次挥手呢？" class="headerlink" title="为什么建立连接是三次握手，关闭连接确是四次挥手呢？"></a>为什么建立连接是三次握手，关闭连接确是四次挥手呢？</h2><blockquote>
+<p>建立连接的时候， 服务器在LISTEN状态下，收到建立连接请求的SYN报文后，把ACK和SYN放在一个报文里发送给客户端。 </p>
+<p>而关闭连接时，服务器收到对方的FIN报文时，仅仅表示对方不再发送数据了但是还能接收数据，而自己也未必全部数据都发送给对方了，所以己方可以立即关闭，也可以发送一些数据给对方后，再发送FIN报文给对方来表示同意现在关闭连接，因此，己方ACK和FIN一般都会分开发送，从而导致多了一次。</p>
+</blockquote>
+<h2 id="如果已经建立了连接，但是客户端突然出现故障了怎么办？"><a href="#如果已经建立了连接，但是客户端突然出现故障了怎么办？" class="headerlink" title="如果已经建立了连接，但是客户端突然出现故障了怎么办？"></a>如果已经建立了连接，但是客户端突然出现故障了怎么办？</h2><blockquote>
+<p>TCP还设有一个保活计时器，显然，客户端如果出现故障，服务器不能一直等下去，白白浪费资源。服务器每收到一次客户端的请求后都会重新复位这个计时器，时间通常是设置为2小时，若两小时还没有收到客户端的任何数据，服务器就会发送一个探测报文段，以后每隔75分钟发送一次。若一连发送10个探测报文仍然没反应，服务器就认为客户端出了故障，接着就关闭连接。</p>
+</blockquote>
+
     </div>
 
-  <article class="my-post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="my-post-header">
-
-      <div class="my-post-meta">
-        <time class="my-post-time" itemprop="dateCreated"
-              datetime="2020-08-12T18:02:36+08:00"
-              content="2020-08-12">
-          08-12
-        </time>
+    
+    
+    
+      
+        <div class="reward-container">
+  <div>感谢您的支持！</div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="CodeHeap 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="CodeHeap 支付宝">
+        <p>支付宝</p>
       </div>
 
-      <h2 class="my-post-title">
-          <a class="my-post-title-link" href="/posts/3fed0d82.html" itemprop="url">
-            
-              <span itemprop="name">Spring泛型依赖注入</span>
-            
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-    </div>
   </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>CodeHeap
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://jrbcode.gitee.io/posts/cdbbe57d.html" title="TCP-三次握手和四次挥手">https://jrbcode.gitee.io/posts/cdbbe57d.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <!--<a href="/tags/TCP/" rel="tag"># TCP</a>-->
+              <a href="/tags/TCP/" rel="tag"><i class="fa fa-tag"></i> TCP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/posts/3fed0d82.html" rel="next" title="Spring泛型依赖注入">
+                  <i class="fa fa-chevron-left"></i> Spring泛型依赖注入
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
   
   
   
 
-  
-
+  </div>
 
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -312,6 +507,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP报文格式"><span class="nav-number">1.</span> <span class="nav-text">TCP报文格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三次握手"><span class="nav-number">2.</span> <span class="nav-text">三次握手</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#过程"><span class="nav-number">2.1.</span> <span class="nav-text">过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过程分析："><span class="nav-number">2.2.</span> <span class="nav-text">过程分析：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四次挥手"><span class="nav-number">3.</span> <span class="nav-text">四次挥手</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#过程-1"><span class="nav-number">3.1.</span> <span class="nav-text">过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过程分析"><span class="nav-number">3.2.</span> <span class="nav-text">过程分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他问题"><span class="nav-number">4.</span> <span class="nav-text">其他问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么三次握手和四次挥手？"><span class="nav-number">4.1.</span> <span class="nav-text">为什么三次握手和四次挥手？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么客户端最后还要等待2MSL？"><span class="nav-number">4.2.</span> <span class="nav-text">为什么客户端最后还要等待2MSL？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么建立连接是三次握手，关闭连接确是四次挥手呢？"><span class="nav-number">4.3.</span> <span class="nav-text">为什么建立连接是三次握手，关闭连接确是四次挥手呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果已经建立了连接，但是客户端突然出现故障了怎么办？"><span class="nav-number">4.4.</span> <span class="nav-text">如果已经建立了连接，但是客户端突然出现故障了怎么办？</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
